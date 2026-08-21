@@ -6,18 +6,18 @@ import logoPath from "@assets/Retreat_2026__20260808_123924_0000_1786193668114.p
 export function Shell({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-[100dvh] flex flex-col bg-background selection:bg-primary/20 selection:text-primary-foreground">
-      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black text-white shadow-sm">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 transition-opacity hover:opacity-80">
             <img src={logoPath} alt="BWYDC Logo" className="h-10 w-auto object-contain" />
             <div className="hidden sm:flex flex-col">
-              <span className="font-bold text-foreground text-sm tracking-tight leading-tight">Bong County Women and</span>
+              <span className="font-bold text-white text-sm tracking-tight leading-tight">Bong County Women and</span>
               <span className="font-bold text-primary text-sm tracking-tight leading-tight">Youth Development Cooperration</span>
             </div>
           </Link>
 
           <Link href="/applications">
-            <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold">
+            <Button variant="outline" size="sm" className="border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground font-semibold">
               Admin
             </Button>
           </Link>
@@ -28,9 +28,31 @@ export function Shell({ children }: { children: ReactNode }) {
         {children}
       </main>
 
-      <footer className="border-t border-border/40 bg-background/50 py-8 mt-auto">
-        <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Bong County Women and Youth Development Cooperration. All rights reserved.</p>
+      <footer className="border-t border-white/10 bg-black py-10 mt-auto text-white">
+        <div className="container mx-auto px-4 text-center text-sm">
+          <p className="text-white/80">
+            &copy; {new Date().getFullYear()} Bong County Women and Youth Development Cooperration. All rights reserved.
+          </p>
+          <p className="mt-3 text-white/80">
+            Developed by:{' '}
+            <a
+              href="https://www.itechnetworkafrica.com"
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold text-primary underline-offset-4 transition-colors hover:text-primary/80 hover:underline"
+            >
+              iTech Network Africa
+            </a>
+          </p>
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-white/70" aria-label="Social media platforms">
+            <span className="font-semibold text-white/90">Connect with us:</span>
+            <span>Facebook</span>
+            <span>Instagram</span>
+            <span>X</span>
+            <span>YouTube</span>
+            <span>LinkedIn</span>
+            <span>WhatsApp Business</span>
+          </div>
         </div>
       </footer>
     </div>
