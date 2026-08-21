@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "BWYDC Membership Application"
+description = "A digital membership application form for the Bong County Women and Youth Development Cooperations (BWYDC). Allows prospective members to fill out and submit their membership application online, covering personal details, membership type, interest categories, and a signed term agreement."
+version = "1.0.0"
+id = "artifacts/membership-form"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19033
+
+[services.development]
+run = "pnpm --filter @workspace/membership-form run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/membership-form", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/membership-form/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19033"
+BASE_PATH = "/"

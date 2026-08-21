@@ -3,13 +3,15 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: BWYDC Membership Application API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: applications
+    description: Membership applications
 paths:
   /healthz:
     get:
@@ -24,6 +26,121 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /membership-applications:
+    get:
+      operationId: listApplications
+      tags: [applications]
+      summary: List all membership applications
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [pending, approved, denied]
+          required: false
+      responses:
+        "200":
+          description: List of applications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MembershipApplication"
+    post:
+      operationId: createApplication
+      tags: [applications]
+      summary: Submit a new membership application
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MembershipApplicationInput"
+      responses:
+        "201":
+          description: Application submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MembershipApplication"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /membership-applications/stats:
+    get:
+      operationId: getApplicationStats
+      tags: [applications]
+      summary: Get application statistics
+      responses:
+        "200":
+          description: Application statistics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApplicationStats"
+
+  /membership-applications/{id}:
+    get:
+      operationId: getApplication
+      tags: [applications]
+      summary: Get a specific application
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: number
+      responses:
+        "200":
+          description: Application details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MembershipApplication"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /membership-applications/{id}/status:
+    patch:
+      operationId: updateApplicationStatus
+      tags: [applications]
+      summary: Update application status (approve or deny)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApplicationStatusUpdate"
+      responses:
+        "200":
+          description: Status updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MembershipApplication"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +151,217 @@ components:
       required:
         - status
 
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+
+    MembershipApplication:
+      type: object
+      required:
+        - id
+        - fullName
+        - county
+        - countryState
+        - phoneNumber
+        - emergencyContactName
+        - emergencyContactPhone
+        - dateOfBirth
+        - age
+        - educationalBackground
+        - maritalStatus
+        - membershipType
+        - interestCategories
+        - residentOf
+        - signatureName
+        - status
+        - submittedAt
+      properties:
+        id:
+          type: number
+        fullName:
+          type: string
+        county:
+          type: string
+        countryState:
+          type: string
+        town:
+          type: ["string", "null"]
+        phoneNumber:
+          type: string
+        emailAddress:
+          type: ["string", "null"]
+        gender:
+          type: ["string", "null"]
+          enum: [M, F, null]
+        emergencyContactName:
+          type: string
+        emergencyContactPhone:
+          type: string
+        dateOfBirth:
+          type: string
+        age:
+          type: number
+        educationalBackground:
+          type: string
+        maritalStatus:
+          type: string
+        numberOfChildren:
+          type: ["number", "null"]
+        affiliateGroup:
+          type: ["string", "null"]
+        membershipType:
+          type: string
+          enum: [individual, group, associate]
+        interestCategories:
+          type: array
+          items:
+            type: string
+            enum: [A, AB, AC, AD, AE]
+        onBehalfOf:
+          type: ["string", "null"]
+        residentOf:
+          type: string
+        signatureName:
+          type: string
+        sharesContribution:
+          type: ["string", "null"]
+        newsletterSubscribe:
+          type: ["boolean", "null"]
+        status:
+          type: string
+          enum: [pending, approved, denied]
+        reviewDate:
+          type: ["string", "null"]
+        reviewerName:
+          type: ["string", "null"]
+        reviewerPosition:
+          type: ["string", "null"]
+        submittedAt:
+          type: string
+
+    MembershipApplicationInput:
+      type: object
+      required:
+        - fullName
+        - county
+        - countryState
+        - phoneNumber
+        - emergencyContactName
+        - emergencyContactPhone
+        - dateOfBirth
+        - age
+        - educationalBackground
+        - maritalStatus
+        - membershipType
+        - interestCategories
+        - residentOf
+        - signatureName
+      properties:
+        fullName:
+          type: string
+          minLength: 1
+        county:
+          type: string
+          minLength: 1
+        countryState:
+          type: string
+          minLength: 1
+        town:
+          type: string
+        phoneNumber:
+          type: string
+          minLength: 1
+        emailAddress:
+          type: string
+        gender:
+          type: string
+          enum: [M, F]
+        emergencyContactName:
+          type: string
+          minLength: 1
+        emergencyContactPhone:
+          type: string
+          minLength: 1
+        dateOfBirth:
+          type: string
+          minLength: 1
+        age:
+          type: number
+          minimum: 1
+        educationalBackground:
+          type: string
+          minLength: 1
+        maritalStatus:
+          type: string
+          minLength: 1
+        numberOfChildren:
+          type: number
+          minimum: 0
+        affiliateGroup:
+          type: string
+        membershipType:
+          type: string
+          enum: [individual, group, associate]
+        interestCategories:
+          type: array
+          items:
+            type: string
+            enum: [A, AB, AC, AD, AE]
+          minItems: 1
+        onBehalfOf:
+          type: string
+        residentOf:
+          type: string
+          minLength: 1
+        signatureName:
+          type: string
+          minLength: 1
+        sharesContribution:
+          type: string
+        newsletterSubscribe:
+          type: boolean
+
+    ApplicationStatusUpdate:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          enum: [approved, denied]
+        reviewerName:
+          type: string
+        reviewerPosition:
+          type: string
+
+    ApplicationStats:
+      type: object
+      required:
+        - total
+        - pending
+        - approved
+        - denied
+        - byMembershipType
+      properties:
+        total:
+          type: number
+        pending:
+          type: number
+        approved:
+          type: number
+        denied:
+          type: number
+        byMembershipType:
+          type: object
+          properties:
+            individual:
+              type: number
+            group:
+              type: number
+            associate:
+              type: number
+          required: [individual, group, associate]

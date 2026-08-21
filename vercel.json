@@ -1,0 +1,9 @@
+{
+  "buildCommand": "pnpm --filter @workspace/membership-form run build",
+  "outputDirectory": "artifacts/membership-form/dist/public",
+  "installCommand": "pnpm install",
+  "framework": null,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

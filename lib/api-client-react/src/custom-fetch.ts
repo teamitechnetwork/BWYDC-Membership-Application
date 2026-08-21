@@ -29,6 +29,11 @@ export function setBaseUrl(url: string | null): void {
   _baseUrl = url ? url.replace(/\/+$/, "") : null;
 }
 
+/** Returns the currently configured base URL (empty string when unset). */
+export function getApiBaseUrl(): string {
+  return _baseUrl ?? "";
+}
+
 /**
  * Register a getter that supplies a bearer auth token.  Before every fetch
  * the getter is invoked; when it returns a non-null string, an
@@ -360,7 +365,10 @@ export async function customFetch<T = unknown>(
 
   const requestInfo = { method, url: resolveUrl(input) };
 
-  const response = await fetch(input, { ...init, method, headers });
+  // Always send cookies so that session-based auth works cross-origin
+  // (e.g. API on /api path served through a different port than the frontend).
+  // Bearer-token auth (mobile/Expo) is unaffected: it does not rely on cookies.
+  const response = await fetch(input, { credentials: "include", ...init, method, headers });
 
   if (!response.ok) {
     const errorData = await parseErrorBody(response, method);
