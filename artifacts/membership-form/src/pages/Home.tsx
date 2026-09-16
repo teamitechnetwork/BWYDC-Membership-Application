@@ -11,10 +11,11 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useCreateApplication, getApiBaseUrl } from '@workspace/api-client-react';
 import { toast } from 'sonner';
-import { useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { differenceInYears } from 'date-fns';
 import { Loader2, CheckCircle2, Upload, CreditCard } from 'lucide-react';
 import { LIBERIA_COUNTIES, LIBERIA_DISTRICTS } from '@/lib/liberia';
+import logoPath from '@assets/Retreat_2026__20260808_123924_0000_1786193668114.png';
 
 const formSchema = z.object({
   fullName: z.string().min(2, 'Full name is required'),
@@ -69,10 +70,29 @@ const EDUCATION_OPTIONS = [
 ];
 
 export default function Home() {
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [countdown, setCountdown] = useState(10);
   const [successId, setSuccessId] = useState<number | null>(null);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const photoInputRef = useRef<HTMLInputElement>(null);
   const createApplication = useCreateApplication();
+
+  useEffect(() => {
+    if (!showWelcome) return;
+
+    const timer = window.setInterval(() => {
+      setCountdown((current) => {
+        if (current <= 1) {
+          window.clearInterval(timer);
+          window.setTimeout(() => setShowWelcome(false), 450);
+          return 0;
+        }
+        return current - 1;
+      });
+    }, 1000);
+
+    return () => window.clearInterval(timer);
+  }, [showWelcome]);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -185,6 +205,71 @@ export default function Home() {
       }
     }
   };
+
+  if (showWelcome) {
+    const circumference = 2 * Math.PI * 54;
+    const ringOffset = circumference * (1 - countdown / 10);
+
+    return (
+      <main className="relative min-h-[100dvh] overflow-hidden bg-background px-4 py-10 text-foreground">
+        <div className="absolute inset-x-0 top-0 h-2 bg-primary" />
+        <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute -bottom-32 -left-24 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
+
+        <div className="relative mx-auto flex min-h-[calc(100dvh-5rem)] w-full max-w-2xl items-center justify-center">
+          <section className="w-full text-center">
+            <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-2xl bg-white p-2 shadow-lg ring-1 ring-primary/15">
+              <img src={logoPath} alt="Bong County Women and Youth Development Cooperation logo" className="h-full w-full rounded-xl object-contain" />
+            </div>
+
+            <p className="mt-8 text-xs font-bold uppercase tracking-[0.28em] text-primary">
+              Bong County Women & Youth Development Cooperation
+            </p>
+            <h1 className="mx-auto mt-4 max-w-xl text-4xl font-bold tracking-tight sm:text-5xl">
+              Welcome to your membership journey
+            </h1>
+            <p className="mx-auto mt-5 max-w-lg text-base leading-7 text-muted-foreground sm:text-lg">
+              We are glad you are here. Take a moment to prepare your details, then complete the application to join a stronger community.
+            </p>
+
+            <div className="mx-auto mt-10 flex h-36 w-36 items-center justify-center">
+              <svg className="h-full w-full -rotate-90" viewBox="0 0 120 120" role="img" aria-label={`Application begins in ${countdown} seconds`}>
+                <circle cx="60" cy="60" r="54" fill="none" stroke="hsl(var(--primary) / 0.14)" strokeWidth="7" />
+                <circle
+                  cx="60"
+                  cy="60"
+                  r="54"
+                  fill="none"
+                  stroke="hsl(var(--primary))"
+                  strokeLinecap="round"
+                  strokeWidth="7"
+                  strokeDasharray={circumference}
+                  strokeDashoffset={ringOffset}
+                  className="transition-[stroke-dashoffset] duration-700 ease-linear"
+                />
+              </svg>
+              <div className="absolute flex flex-col items-center">
+                <span className="text-4xl font-bold tabular-nums text-primary">{countdown}</span>
+                <span className="mt-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  seconds
+                </span>
+              </div>
+            </div>
+
+            <p className="mt-6 text-sm font-medium text-muted-foreground">
+              Your application form will open shortly
+            </p>
+            <div className="mx-auto mt-8 h-1.5 max-w-xs overflow-hidden rounded-full bg-primary/15">
+              <div
+                className="h-full rounded-full bg-primary transition-[width] duration-700 ease-linear"
+                style={{ width: `${((10 - countdown) / 10) * 100}%` }}
+              />
+            </div>
+          </section>
+        </div>
+      </main>
+    );
+  }
 
   if (successId) {
     return (
