@@ -1,0 +1,6 @@
+- [BWYDC project setup](bwydc-setup.md) — tsx blocked by firewall; drizzle-kit removed from lib/db; DB table created via executeSql
+- [CSRF with cross-site cookies](bwydc-csrf.md) — SameSite=None cookies need Origin-check CSRF middleware; CORS alone doesn't block credentialed cross-site POSTs
+- [Group chat architecture](bwydc-chat.md) — realtime via DB polling (autoscale-safe, no WS); WebRTC mesh signaling rules; member-token auth under /public/*
+- [Email via Resend](bwydc-email.md) — test mode limits senders/recipients until domain verified; sender email stored in app_settings; stale lib dist .d.ts breaks tsc — rebuild lib packages
+- [GitHub push authentication](github-push.md) — connected GitHub App may not authenticate HTTPS git pushes; verify remote access before promising publication
+- [Imported workspace startup](imported-workspace-startup.md) — after moving a preserved repo into a project, rebuild pnpm links before restarting managed artifact workflows
