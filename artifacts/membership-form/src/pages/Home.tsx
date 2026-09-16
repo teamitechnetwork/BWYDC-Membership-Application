@@ -39,13 +39,37 @@ import { useEffect, useState, useRef } from "react";
 import { differenceInYears } from "date-fns";
 import {
   ArrowRight,
+  BriefcaseBusiness,
+  CheckCircle2,
+  CreditCard,
+  Loader2,
+  MapPin,
+  ShieldCheck,
+  Sparkles,
+  Upload,
+  UserRound,
+} from 'lucide-react';
+=======
+<<<<<<< HEAD
+import {
+  ArrowRight,
   CheckCircle2,
   CreditCard,
   Loader2,
   Upload,
+<<<<<<< HEAD
 } from "lucide-react";
 import { LIBERIA_COUNTIES, LIBERIA_DISTRICTS } from "@/lib/liberia";
 import logoPath from "@assets/Retreat_2026__20260808_123924_0000_1786193668114.png";
+=======
+} from 'lucide-react';
+=======
+import { Loader2, CheckCircle2, Upload, CreditCard } from 'lucide-react';
+>>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
+>>>>>>> 0d053c5561ec27462c0dc1140ee84e4a16ca6503
+import { LIBERIA_COUNTIES, LIBERIA_DISTRICTS } from '@/lib/liberia';
+import logoPath from '@assets/Retreat_2026__20260808_123924_0000_1786193668114.png';
+>>>>>>> eebfcb0e6051256be9f95ca9d80b4321cd4f353b
 
 const formSchema = z
   .object({
@@ -123,6 +147,16 @@ export default function Home() {
     "loading",
   );
   const [countdown, setCountdown] = useState(3);
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+  const [countdown, setCountdown] = useState(3);
+=======
+  const [countdown, setCountdown] = useState(10);
+>>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
+>>>>>>> 0d053c5561ec27462c0dc1140ee84e4a16ca6503
+>>>>>>> eebfcb0e6051256be9f95ca9d80b4321cd4f353b
   const [successId, setSuccessId] = useState<number | null>(null);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const photoInputRef = useRef<HTMLInputElement>(null);
@@ -134,7 +168,19 @@ export default function Home() {
     const countdownTimer = window.setInterval(() => {
       setCountdown((current) => Math.max(0, current - 1));
     }, 1000);
+<<<<<<< HEAD
     const stageTimer = window.setTimeout(() => setEntryStage("welcome"), 3000);
+=======
+<<<<<<< HEAD
+    const stageTimer = window.setTimeout(() => setEntryStage('welcome'), 3000);
+=======
+<<<<<<< HEAD
+    const stageTimer = window.setTimeout(() => setEntryStage('welcome'), 3000);
+=======
+    const stageTimer = window.setTimeout(() => setEntryStage('welcome'), 10000);
+>>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
+>>>>>>> 0d053c5561ec27462c0dc1140ee84e4a16ca6503
+>>>>>>> eebfcb0e6051256be9f95ca9d80b4321cd4f353b
 
     return () => {
       window.clearInterval(countdownTimer);
@@ -143,7 +189,24 @@ export default function Home() {
   }, [entryStage]);
 
   useEffect(() => {
+<<<<<<< HEAD
     if (entryStage === "form") return;
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    if (entryStage !== 'welcome') return;
+
+    const timer = window.setTimeout(() => setEntryStage('form'), 1800);
+    return () => window.clearTimeout(timer);
+  }, [entryStage]);
+
+  useEffect(() => {
+>>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
+>>>>>>> 0d053c5561ec27462c0dc1140ee84e4a16ca6503
+    if (entryStage === 'form') return;
+>>>>>>> eebfcb0e6051256be9f95ca9d80b4321cd4f353b
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -369,10 +432,52 @@ export default function Home() {
                 Get started
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
+<<<<<<< HEAD
               <p className="mt-4 text-xs text-muted-foreground">
                 Takes about 5 minutes · Your information stays private
               </p>
             </div>
+=======
+              <p className="mt-4 text-xs text-muted-foreground">Takes about 5 minutes · Your information stays private</p>
+            </div>
+=======
+<<<<<<< HEAD
+                {LOADING_MESSAGES[Math.floor((3 - countdown) / 2) % LOADING_MESSAGES.length]}
+              </p>
+            </>
+          ) : (
+            <div className="mt-10 animate-in fade-in slide-in-from-bottom-3 duration-500">
+              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primary">BWYDC Membership</p>
+              <h1 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                Welcome — let’s get started
+              </h1>
+              <p className="mx-auto mt-4 max-w-sm text-base leading-7 text-muted-foreground">
+                A few thoughtful questions help us connect you with the right membership experience.
+              </p>
+              <Button
+                type="button"
+                size="lg"
+                className="mt-8 h-12 rounded-full px-7 text-base font-semibold shadow-lg shadow-primary/20"
+                onClick={() => {
+                  setEntryStage('form');
+                }}
+              >
+                Get started
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+              <p className="mt-4 text-xs text-muted-foreground">Takes about 5 minutes · Your information stays private</p>
+            </div>
+=======
+                {LOADING_MESSAGES[Math.floor((10 - countdown) / 3) % LOADING_MESSAGES.length]}
+              </p>
+            </>
+          ) : (
+            <h1 className="mt-10 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              Welcome to BWYDC Membership
+            </h1>
+>>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
+>>>>>>> 0d053c5561ec27462c0dc1140ee84e4a16ca6503
+>>>>>>> eebfcb0e6051256be9f95ca9d80b4321cd4f353b
           )}
         </section>
       </main>
@@ -439,6 +544,7 @@ export default function Home() {
   }
 
   return (
+<<<<<<< HEAD
     <div className="min-h-full bg-white">
       <div className="container mx-auto max-w-4xl px-4 py-8 sm:py-12">
         <div className="mb-8 border-b border-border/70 pb-8 text-center">
@@ -482,6 +588,128 @@ export default function Home() {
                       <FormLabel>
                         Full Name <span className="text-destructive">*</span>
                       </FormLabel>
+=======
+<<<<<<< HEAD
+    <div className="container mx-auto max-w-5xl px-4 py-8 sm:py-12">
+      <div className="mb-8 max-w-2xl">
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+          <Sparkles className="h-3.5 w-3.5" />
+          Membership application
+        </div>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">Let’s get to know you.</h1>
+        <p className="mt-3 max-w-xl text-base leading-7 text-muted-foreground sm:text-lg">
+          Join the Bong County Women and Youth Development Cooperration. We’ll guide you through the application one easy step at a time.
+=======
+<<<<<<< HEAD
+    <div className="min-h-full bg-white">
+      <div className="container mx-auto max-w-4xl px-4 py-8 sm:py-12">
+      <div className="mb-8 border-b border-border/70 pb-8 text-center">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+          BWYDC · Membership application
+        </p>
+        <h1 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
+          Join BWYDC and grow with your community
+        </h1>
+        <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-muted-foreground sm:text-base">
+          Tell us about yourself and how you would like to take part in the Bong County Women and Youth Development Cooperation.
+        </p>
+        <div className="mx-auto mt-6 h-1 w-14 bg-primary" aria-hidden="true" />
+      </div>
+
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="reference-form space-y-10">
+
+          {/* SECTION 1: Contact Details */}
+          <Card className="overflow-visible rounded-none border-0 bg-transparent shadow-none">
+            <CardHeader className="border-b border-border/70 px-0 py-0 pb-3">
+              <CardTitle className="text-lg font-bold">Contact details</CardTitle>
+              <CardDescription className="mt-1 text-sm">Your primary contact and location information.</CardDescription>
+            </CardHeader>
+            <CardContent className="grid grid-cols-1 gap-x-5 gap-y-4 px-0 py-6 sm:grid-cols-2">
+=======
+    <div className="container max-w-3xl mx-auto py-8 px-4">
+      <div className="mb-8 text-center">
+        <h1 className="text-4xl font-bold tracking-tight text-foreground mb-3">Membership Application</h1>
+           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Join the Bong County Women and Youth Development Cooperration. Together we build stronger communities.
+>>>>>>> 0d053c5561ec27462c0dc1140ee84e4a16ca6503
+        </p>
+      </div>
+
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+
+          {/* SECTION 1: Contact Details */}
+          <Card className="overflow-hidden rounded-3xl border-border/60 shadow-lg shadow-black/[0.03]">
+            <CardHeader className="border-b border-border/50 bg-muted/20 px-6 py-7 sm:px-8">
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <MapPin className="h-5 w-5" />
+              </div>
+              <CardTitle className="text-2xl">Contact details</CardTitle>
+              <CardDescription className="mt-1 text-base">Start with the best way to reach you and where you’re based.</CardDescription>
+            </CardHeader>
+<<<<<<< HEAD
+            <CardContent className="grid grid-cols-1 gap-6 px-6 py-7 sm:px-8 md:grid-cols-2">
+=======
+            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
+>>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
+>>>>>>> 0d053c5561ec27462c0dc1140ee84e4a16ca6503
+              <FormField
+                control={form.control}
+                name="fullName"
+                render={({ field }) => (
+                  <FormItem className="md:col-span-2">
+                    <FormLabel>Full Name <span className="text-destructive">*</span></FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your full name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="phoneNumber"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Phone Number <span className="text-destructive">*</span></FormLabel>
+                    <FormControl>
+                      <Input placeholder="e.g. 077 123 4567" type="tel" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="emailAddress"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email Address <span className="text-muted-foreground text-xs">(Optional)</span></FormLabel>
+                    <FormControl>
+                      <Input placeholder="your.email@example.com" type="email" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="countryState"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Country / State <span className="text-destructive">*</span></FormLabel>
+                    <Select
+                      value={field.value}
+                      onValueChange={(value) => {
+                        field.onChange(value);
+                        form.setValue('county', '');
+                        form.setValue('district', '');
+                      }}
+                    >
+>>>>>>> eebfcb0e6051256be9f95ca9d80b4321cd4f353b
                       <FormControl>
                         <Input placeholder="Enter your full name" {...field} />
                       </FormControl>
@@ -567,10 +795,162 @@ export default function Home() {
                           <SelectItem value="Other">Other</SelectItem>
                         </SelectContent>
                       </Select>
+<<<<<<< HEAD
                       <FormMessage />
                     </FormItem>
                   )}
                 />
+=======
+                    ) : (
+                      <FormControl>
+                        <Input placeholder="Enter your county or state" {...field} />
+                      </FormControl>
+                    )}
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="district"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      District {form.watch('countryState') === 'Liberia' && <span className="text-destructive">*</span>}
+                      {form.watch('countryState') !== 'Liberia' && <span className="text-muted-foreground text-xs"> (Optional)</span>}
+                    </FormLabel>
+                    {form.watch('countryState') === 'Liberia' ? (
+                      <Select value={field.value} onValueChange={field.onChange} disabled={!form.watch('county')}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder={form.watch('county') ? 'Select your district' : 'Select a county first'} />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {(LIBERIA_DISTRICTS[form.watch('county')] ?? []).map((district) => (
+                            <SelectItem key={district} value={district}>{district}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    ) : (
+                      <FormControl>
+                        <Input placeholder="Enter your district" {...field} />
+                      </FormControl>
+                    )}
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="town"
+                render={({ field }) => (
+                  <FormItem className="md:col-span-2">
+                    <FormLabel>Town <span className="text-muted-foreground text-xs">(Optional)</span></FormLabel>
+                    <FormControl>
+                      <Input placeholder="e.g. Gbarnga" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Emergency Contact */}
+              <FormField
+                control={form.control}
+                name="emergencyContactName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Emergency Contact Name <span className="text-destructive">*</span></FormLabel>
+                    <FormControl>
+                      <Input placeholder="Full name of contact person" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="emergencyContactPhone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Emergency Contact Phone <span className="text-destructive">*</span></FormLabel>
+                    <FormControl>
+                      <Input placeholder="e.g. 077 987 6543" type="tel" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </CardContent>
+          </Card>
+
+          {/* SECTION 2: Personal Profile */}
+<<<<<<< HEAD
+          <Card className="overflow-hidden rounded-3xl border-border/60 shadow-lg shadow-black/[0.03]">
+            <CardHeader className="border-b border-border/50 bg-muted/20 px-6 py-7 sm:px-8">
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <BriefcaseBusiness className="h-5 w-5" />
+              </div>
+              <CardTitle className="text-2xl">Your profile</CardTitle>
+              <CardDescription className="mt-1 text-base">Help us understand your background and interests.</CardDescription>
+            </CardHeader>
+            <CardContent className="grid grid-cols-1 gap-6 px-6 py-7 sm:px-8 md:grid-cols-2">
+=======
+<<<<<<< HEAD
+          <Card className="overflow-visible rounded-none border-0 bg-transparent shadow-none">
+            <CardHeader className="border-b border-border/70 px-0 py-0 pb-3">
+              <CardTitle className="text-lg font-bold">Personal profile</CardTitle>
+              <CardDescription className="mt-1 text-sm">A few details about your background.</CardDescription>
+            </CardHeader>
+            <CardContent className="grid grid-cols-1 gap-x-5 gap-y-4 px-0 py-6 sm:grid-cols-2">
+=======
+          <Card className="border-border/50 shadow-sm overflow-hidden">
+            <div className="h-2 w-full bg-primary" />
+            <CardHeader>
+              <CardTitle>Personal Profile</CardTitle>
+              <CardDescription>Tell us a little more about yourself.</CardDescription>
+            </CardHeader>
+            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
+>>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
+>>>>>>> 0d053c5561ec27462c0dc1140ee84e4a16ca6503
+              <FormField
+                control={form.control}
+                name="gender"
+                render={({ field }) => (
+                  <FormItem className="space-y-3">
+                    <FormLabel>Gender <span className="text-muted-foreground text-xs">(Optional)</span></FormLabel>
+                    <FormControl>
+                      <RadioGroup
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                        className="flex flex-row space-x-4"
+                      >
+                        <FormItem className="flex items-center space-x-2 space-y-0">
+                          <FormControl>
+                            <RadioGroupItem value="M" />
+                          </FormControl>
+                          <FormLabel className="font-normal cursor-pointer">Male</FormLabel>
+                        </FormItem>
+                        <FormItem className="flex items-center space-x-2 space-y-0">
+                          <FormControl>
+                            <RadioGroupItem value="F" />
+                          </FormControl>
+                          <FormLabel className="font-normal cursor-pointer">Female</FormLabel>
+                        </FormItem>
+                      </RadioGroup>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+<<<<<<< HEAD
+              <div className="space-y-0 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-4">
+=======
+              <div className="space-y-0 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+>>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
+>>>>>>> eebfcb0e6051256be9f95ca9d80b4321cd4f353b
                 <FormField
                   control={form.control}
                   name="county"
@@ -728,7 +1108,166 @@ export default function Home() {
               </CardContent>
             </Card>
 
+<<<<<<< HEAD
             {/* SECTION 2: Personal Profile */}
+=======
+              <FormField
+                control={form.control}
+                name="educationalBackground"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Educational Background <span className="text-destructive">*</span></FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select education level" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {EDUCATION_OPTIONS.map((opt) => (
+                          <SelectItem key={opt} value={opt}>{opt}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="occupation"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Occupation <span className="text-muted-foreground text-xs">(Optional)</span></FormLabel>
+                    <FormControl>
+                      <Input placeholder="e.g. Teacher, Farmer, Business owner" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="maritalStatus"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Marital Status <span className="text-destructive">*</span></FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select status" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="Single">Single</SelectItem>
+                        <SelectItem value="Married">Married</SelectItem>
+                        <SelectItem value="Divorced">Divorced</SelectItem>
+                        <SelectItem value="Widowed">Widowed</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="numberOfChildren"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Number of Children <span className="text-muted-foreground text-xs">(Optional)</span></FormLabel>
+                    <FormControl>
+                      <Input type="number" min="0" placeholder="0" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="affiliateGroup"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Affiliate Group/Org <span className="text-muted-foreground text-xs">(Optional)</span></FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter organization name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Passport Photo */}
+              <div className="md:col-span-2">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium leading-none">
+                    Passport Photo <span className="text-muted-foreground text-xs">(Optional)</span>
+                  </label>
+                  <div
+                    className="flex flex-col items-center justify-center gap-2 border-2 border-dashed border-border rounded-md p-6 cursor-pointer hover:bg-muted/30 transition-colors"
+                    onClick={() => photoInputRef.current?.click()}
+                  >
+                    {photoFile ? (
+                      <div className="flex items-center gap-3">
+                        <img
+                          src={URL.createObjectURL(photoFile)}
+                          alt="Preview"
+                          className="h-16 w-16 object-cover rounded-md border border-border"
+                        />
+                        <div>
+                          <p className="text-sm font-medium text-foreground">{photoFile.name}</p>
+                          <button
+                            type="button"
+                            className="text-xs text-destructive hover:underline mt-1"
+                            onClick={(e) => { e.stopPropagation(); setPhotoFile(null); }}
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <>
+                        <Upload className="h-7 w-7 text-muted-foreground" />
+                        <p className="text-sm text-muted-foreground text-center">
+                          Click to upload a passport-size photo
+                        </p>
+                      </>
+                    )}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    JPG, PNG or WEBP. You may also submit your photo later when visiting the office.
+                  </p>
+                  <input
+                    ref={photoInputRef}
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    className="hidden"
+                    onChange={(e) => setPhotoFile(e.target.files?.[0] ?? null)}
+                  />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* SECTION 3 & 4: Membership Type & Interests */}
+<<<<<<< HEAD
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <Card className="overflow-hidden rounded-3xl border-border/60 shadow-lg shadow-black/[0.03]">
+              <CardHeader className="border-b border-border/50 bg-muted/20 px-6 py-7">
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  <Sparkles className="h-5 w-5" />
+                </div>
+                <CardTitle className="text-2xl">Membership type</CardTitle>
+                <CardDescription className="mt-1 text-base">Choose the option that best fits you.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4 px-6 py-7">
+=======
+<<<<<<< HEAD
+          <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2">
+>>>>>>> eebfcb0e6051256be9f95ca9d80b4321cd4f353b
             <Card className="overflow-visible rounded-none border-0 bg-transparent shadow-none">
               <CardHeader className="border-b border-border/70 px-0 py-0 pb-3">
                 <CardTitle className="text-lg font-bold">
@@ -738,7 +1277,22 @@ export default function Home() {
                   A few details about your background.
                 </CardDescription>
               </CardHeader>
+<<<<<<< HEAD
               <CardContent className="grid grid-cols-1 gap-x-5 gap-y-4 px-0 py-6 sm:grid-cols-2">
+=======
+              <CardContent className="space-y-4 px-0 py-6">
+=======
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Card className="border-border/50 shadow-sm overflow-hidden">
+              <div className="h-2 w-full bg-primary" />
+              <CardHeader>
+                <CardTitle>Membership Type</CardTitle>
+                <CardDescription>Select your desired membership category.</CardDescription>
+              </CardHeader>
+              <CardContent>
+>>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
+>>>>>>> 0d053c5561ec27462c0dc1140ee84e4a16ca6503
+>>>>>>> eebfcb0e6051256be9f95ca9d80b4321cd4f353b
                 <FormField
                   control={form.control}
                   name="gender"
@@ -756,7 +1310,19 @@ export default function Home() {
                           defaultValue={field.value}
                           className="flex flex-row space-x-4"
                         >
+<<<<<<< HEAD
                           <FormItem className="flex items-center space-x-2 space-y-0">
+=======
+<<<<<<< HEAD
+                           <FormItem className="flex cursor-pointer items-start space-x-3 space-y-0 rounded-2xl border border-border/70 p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/[0.03]">
+=======
+<<<<<<< HEAD
+                           <FormItem className="flex cursor-pointer items-start space-x-3 space-y-0 rounded-none border border-border/70 bg-white p-3 transition-colors hover:border-primary/40 hover:bg-primary/[0.03]">
+=======
+                          <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 shadow-sm cursor-pointer hover:bg-muted/50 transition-colors">
+>>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
+>>>>>>> 0d053c5561ec27462c0dc1140ee84e4a16ca6503
+>>>>>>> eebfcb0e6051256be9f95ca9d80b4321cd4f353b
                             <FormControl>
                               <RadioGroupItem value="M" />
                             </FormControl>
@@ -764,13 +1330,49 @@ export default function Home() {
                               Male
                             </FormLabel>
                           </FormItem>
+<<<<<<< HEAD
                           <FormItem className="flex items-center space-x-2 space-y-0">
+=======
+<<<<<<< HEAD
+                           <FormItem className="flex cursor-pointer items-start space-x-3 space-y-0 rounded-2xl border border-border/70 p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/[0.03]">
+=======
+<<<<<<< HEAD
+                           <FormItem className="flex cursor-pointer items-start space-x-3 space-y-0 rounded-none border border-border/70 bg-white p-3 transition-colors hover:border-primary/40 hover:bg-primary/[0.03]">
+=======
+                          <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 shadow-sm cursor-pointer hover:bg-muted/50 transition-colors">
+>>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
+>>>>>>> 0d053c5561ec27462c0dc1140ee84e4a16ca6503
+>>>>>>> eebfcb0e6051256be9f95ca9d80b4321cd4f353b
                             <FormControl>
                               <RadioGroupItem value="F" />
                             </FormControl>
+<<<<<<< HEAD
                             <FormLabel className="font-normal cursor-pointer">
                               Female
                             </FormLabel>
+=======
+                            <div className="space-y-1">
+                              <FormLabel className="font-semibold cursor-pointer">Group / Regular</FormLabel>
+                              <FormDescription>For organizations and collectives</FormDescription>
+                            </div>
+                          </FormItem>
+<<<<<<< HEAD
+                           <FormItem className="flex cursor-pointer items-start space-x-3 space-y-0 rounded-2xl border border-border/70 p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/[0.03]">
+=======
+<<<<<<< HEAD
+                           <FormItem className="flex cursor-pointer items-start space-x-3 space-y-0 rounded-none border border-border/70 bg-white p-3 transition-colors hover:border-primary/40 hover:bg-primary/[0.03]">
+=======
+                          <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 shadow-sm cursor-pointer hover:bg-muted/50 transition-colors">
+>>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
+>>>>>>> 0d053c5561ec27462c0dc1140ee84e4a16ca6503
+                            <FormControl>
+                              <RadioGroupItem value="associate" className="mt-1" />
+                            </FormControl>
+                            <div className="space-y-1">
+                              <FormLabel className="font-semibold cursor-pointer">Associate Membership</FormLabel>
+                              <FormDescription>For supporting partners</FormDescription>
+                            </div>
+>>>>>>> eebfcb0e6051256be9f95ca9d80b4321cd4f353b
                           </FormItem>
                         </RadioGroup>
                       </FormControl>
@@ -779,6 +1381,7 @@ export default function Home() {
                   )}
                 />
 
+<<<<<<< HEAD
                 <div className="space-y-0 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-4">
                   <FormField
                     control={form.control}
@@ -796,6 +1399,90 @@ export default function Home() {
                             onChange={(e) => {
                               field.onChange(e);
                               handleDobChange(e);
+=======
+<<<<<<< HEAD
+            <Card className="overflow-hidden rounded-3xl border-border/60 shadow-lg shadow-black/[0.03]">
+              <CardHeader className="border-b border-border/50 bg-muted/20 px-6 py-7">
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  <UserRound className="h-5 w-5" />
+                </div>
+                <CardTitle className="text-2xl">Your interests</CardTitle>
+                <CardDescription className="mt-1 text-base">Select every area you’d like to explore.</CardDescription>
+              </CardHeader>
+              <CardContent className="px-6 py-7">
+=======
+<<<<<<< HEAD
+            <Card className="overflow-visible rounded-none border-0 bg-transparent shadow-none">
+              <CardHeader className="border-b border-border/70 px-0 py-0 pb-3">
+                <CardTitle className="text-lg font-bold">Your interests</CardTitle>
+                <CardDescription className="mt-1 text-sm">Select every area you’d like to explore.</CardDescription>
+              </CardHeader>
+              <CardContent className="px-0 py-6">
+=======
+            <Card className="border-border/50 shadow-sm overflow-hidden">
+              <div className="h-2 w-full bg-primary" />
+              <CardHeader>
+                <CardTitle>Interest Categories</CardTitle>
+                <CardDescription>Select all areas that apply.</CardDescription>
+              </CardHeader>
+              <CardContent>
+>>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
+>>>>>>> 0d053c5561ec27462c0dc1140ee84e4a16ca6503
+                <FormField
+                  control={form.control}
+                  name="interestCategories"
+                  render={() => (
+                    <FormItem>
+                      <div className="mb-4">
+                        <FormMessage />
+                      </div>
+                      <div className="space-y-3">
+                        {[
+                          { id: 'A', label: 'Loans' },
+                          { id: 'AB', label: 'Group Participation & Development' },
+                          { id: 'AC', label: 'Personal Development and Training' },
+                          { id: 'AD', label: 'Volunteerism' },
+                          { id: 'AE', label: 'General Benefits' },
+                        ].map((item) => (
+                          <FormField
+                            key={item.id}
+                            control={form.control}
+                            name="interestCategories"
+                            render={({ field }) => {
+                              return (
+                                <FormItem
+                                  key={item.id}
+<<<<<<< HEAD
+                                  className="flex cursor-pointer flex-row items-start space-x-3 space-y-0 rounded-2xl border border-transparent p-3 transition-colors hover:border-primary/20 hover:bg-primary/[0.03]"
+=======
+<<<<<<< HEAD
+                                  className="flex cursor-pointer flex-row items-start space-x-3 space-y-0 rounded-none border border-transparent p-2 transition-colors hover:border-primary/20 hover:bg-primary/[0.03]"
+=======
+                                  className="flex flex-row items-start space-x-3 space-y-0"
+>>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
+>>>>>>> 0d053c5561ec27462c0dc1140ee84e4a16ca6503
+                                >
+                                  <FormControl>
+                                    <Checkbox
+                                      checked={field.value?.includes(item.id as any)}
+                                      onCheckedChange={(checked) => {
+                                        return checked
+                                          ? field.onChange([...field.value, item.id])
+                                          : field.onChange(
+                                              field.value?.filter(
+                                                (value) => value !== item.id
+                                              )
+                                            );
+                                      }}
+                                    />
+                                  </FormControl>
+                                  <FormLabel className="font-normal cursor-pointer leading-tight">
+                                    <span className="font-medium text-muted-foreground mr-2">{item.id}:</span>
+                                    {item.label}
+                                  </FormLabel>
+                                </FormItem>
+                              );
+>>>>>>> eebfcb0e6051256be9f95ca9d80b4321cd4f353b
                             }}
                           />
                         </FormControl>
@@ -1016,6 +1703,7 @@ export default function Home() {
               </CardContent>
             </Card>
 
+<<<<<<< HEAD
             {/* SECTION 3 & 4: Membership Type & Interests */}
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2">
               <Card className="overflow-visible rounded-none border-0 bg-transparent shadow-none">
@@ -1095,6 +1783,42 @@ export default function Home() {
                   />
                 </CardContent>
               </Card>
+=======
+          {/* SECTION 5: Agreement */}
+<<<<<<< HEAD
+          <Card className="overflow-hidden rounded-3xl border-border/60 shadow-lg shadow-black/[0.03]">
+            <CardHeader className="border-b border-border/50 bg-muted/20 px-6 py-7 sm:px-8">
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <ShieldCheck className="h-5 w-5" />
+              </div>
+              <CardTitle className="text-2xl">Review & finish</CardTitle>
+              <CardDescription className="mt-1 text-base">One last review, then you’re ready to submit.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6 px-6 py-7 sm:px-8">
+              <div className="rounded-2xl border border-border/60 bg-muted/40 p-6 text-sm leading-relaxed text-muted-foreground">
+=======
+<<<<<<< HEAD
+          <Card className="overflow-visible rounded-none border-0 bg-transparent shadow-none">
+            <CardHeader className="border-b border-border/70 px-0 py-0 pb-3">
+              <CardTitle className="text-lg font-bold">Review & finish</CardTitle>
+              <CardDescription className="mt-1 text-sm">One last review, then you’re ready to submit.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6 px-0 py-6">
+              <div className="border border-border/70 bg-muted/20 p-4 text-sm leading-relaxed text-muted-foreground">
+=======
+          <Card className="border-border/50 shadow-sm overflow-hidden">
+            <div className="h-2 w-full bg-primary" />
+            <CardHeader>
+              <CardTitle>Term Agreement</CardTitle>
+              <CardDescription>Please review and sign to complete your application.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="bg-muted p-6 rounded-md text-sm leading-relaxed border border-border/50 italic font-serif">
+>>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
+>>>>>>> 0d053c5561ec27462c0dc1140ee84e4a16ca6503
+                "I hereby agree to be a member of the Bong County Women and Youth Cooperation (BWYDC). I have completed the Introductory meeting prescribed for prospective members, and I understand the purpose and/or objectives of this cooperation. I agree to: comply with the Cooperation's Guiding Principles and By-Laws; attend meetings, conferences and/or seminars; and participate in the planned savings program."
+              </div>
+>>>>>>> eebfcb0e6051256be9f95ca9d80b4321cd4f353b
 
               <Card className="overflow-visible rounded-none border-0 bg-transparent shadow-none">
                 <CardHeader className="border-b border-border/70 px-0 py-0 pb-3">
@@ -1176,6 +1900,7 @@ export default function Home() {
               </Card>
             </div>
 
+<<<<<<< HEAD
             {/* SECTION 5: Agreement */}
             <Card className="overflow-visible rounded-none border-0 bg-transparent shadow-none">
               <CardHeader className="border-b border-border/70 px-0 py-0 pb-3">
@@ -1348,6 +2073,137 @@ export default function Home() {
               >
                 Cancel
               </Button>
+=======
+<<<<<<< HEAD
+              <div className="space-y-6 border-t border-border pt-6">
+=======
+<<<<<<< HEAD
+              <div className="space-y-6 border-t border-border pt-6">
+=======
+              <div className="pt-4 border-t border-border space-y-6">
+>>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
+>>>>>>> 0d053c5561ec27462c0dc1140ee84e4a16ca6503
+                <FormField
+                  control={form.control}
+                  name="signatureName"
+                  render={({ field }) => (
+                    <FormItem className="max-w-md">
+                      <FormLabel>Signature (Type full name) <span className="text-destructive">*</span></FormLabel>
+                      <FormControl>
+                        <Input placeholder="Type your full name to sign" className="font-serif italic text-lg" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Newsletter */}
+                <FormField
+                  control={form.control}
+                  name="newsletterSubscribe"
+                  render={({ field }) => (
+<<<<<<< HEAD
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-2xl border border-border/50 bg-muted/30 p-4">
+=======
+<<<<<<< HEAD
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 border border-border/70 bg-white p-3">
+=======
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary/30 p-4 rounded-md border border-border/40">
+>>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
+>>>>>>> 0d053c5561ec27462c0dc1140ee84e4a16ca6503
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                          className="mt-1"
+                        />
+                      </FormControl>
+                      <div className="space-y-1">
+                        <FormLabel className="font-semibold cursor-pointer">
+                          Subscribe to our newsletter
+                        </FormLabel>
+                        <FormDescription>
+                          By subscribing to our newsletter, you agree to receive regular updates about our work.
+                        </FormDescription>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="agreeToTerms"
+                  render={({ field }) => (
+<<<<<<< HEAD
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-2xl border border-primary/25 bg-primary/[0.04] p-4">
+=======
+<<<<<<< HEAD
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-2xl border border-primary/25 bg-primary/[0.04] p-4">
+=======
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-primary/5 p-4 rounded-md border border-primary/20">
+>>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
+>>>>>>> 0d053c5561ec27462c0dc1140ee84e4a16ca6503
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                          className="mt-1"
+                        />
+                      </FormControl>
+                      <div className="space-y-1">
+                        <FormLabel className="font-semibold cursor-pointer">
+                          I agree to the terms stated above
+                        </FormLabel>
+                        <FormDescription>
+                          By checking this box and submitting this form, you confirm that all information provided is accurate and you agree to the membership terms.
+                        </FormDescription>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </CardContent>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+          </Card>
+          <div className="flex flex-col-reverse gap-3 border-t border-border/60 pt-6 sm:flex-row sm:items-center sm:justify-between">
+            <Button
+              type="button"
+              variant="outline"
+              size="lg"
+              onClick={handleCancel}
+              disabled={createApplication.isPending}
+              className="rounded-none border-black bg-black px-7 text-white hover:bg-zinc-800 hover:text-white"
+            >
+              Cancel
+            </Button>
+            <Button
+              type="submit"
+              size="lg"
+              disabled={createApplication.isPending}
+              className="gap-2 rounded-none px-7 shadow-md shadow-primary/15"
+            >
+              {createApplication.isPending ? (
+                <>
+                  <Loader2 className="h-5 w-5 animate-spin" />
+                  Submitting…
+                </>
+              ) : (
+                <>
+                  Submit application
+                  <ArrowRight className="h-4 w-4" />
+                </>
+              )}
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </div>
+    </div>
+=======
+            <CardFooter className="bg-muted/50 p-6 flex justify-end border-t border-border/50">
+>>>>>>> eebfcb0e6051256be9f95ca9d80b4321cd4f353b
               <Button
                 type="submit"
                 size="lg"
@@ -1366,10 +2222,38 @@ export default function Home() {
                   </>
                 )}
               </Button>
+<<<<<<< HEAD
             </div>
           </form>
         </Form>
       </div>
+=======
+            </CardFooter>
+>>>>>>> 0d053c5561ec27462c0dc1140ee84e4a16ca6503
+          </Card>
+          <div className="flex justify-end border-t border-border/60 pt-6">
+            <Button
+              type="submit"
+              size="lg"
+              disabled={createApplication.isPending}
+              className="gap-2 rounded-full px-7 shadow-md shadow-primary/15"
+            >
+              {createApplication.isPending ? (
+                <>
+                  <Loader2 className="h-5 w-5 animate-spin" />
+                  Submitting…
+                </>
+              ) : (
+                <>
+                  Submit application
+                  <ArrowRight className="h-4 w-4" />
+                </>
+              )}
+            </Button>
+          </div>
+        </form>
+      </Form>
+>>>>>>> eebfcb0e6051256be9f95ca9d80b4321cd4f353b
     </div>
   );
 }
