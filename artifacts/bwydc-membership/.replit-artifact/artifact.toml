@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/bwydc-membership/"
+title = "BWYDC Membership Application"
+description = "A live membership application for the Bong County Women and Youth Development Cooperation, with county-aware Liberian district selection, applicant details, and secure admin review."
+version = "1.0.0"
+id = "artifacts/bwydc-membership"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/bwydc-membership/" ]
+localPort = 21212
+
+[services.development]
+run = "pnpm --filter @workspace/bwydc-membership run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/bwydc-membership", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/bwydc-membership/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21212"
+BASE_PATH = "/bwydc-membership/"
