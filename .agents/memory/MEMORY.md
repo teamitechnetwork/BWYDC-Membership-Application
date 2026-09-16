@@ -2,3 +2,4 @@
 - [CSRF with cross-site cookies](bwydc-csrf.md) — SameSite=None cookies need Origin-check CSRF middleware; CORS alone doesn't block credentialed cross-site POSTs
 - [Group chat architecture](bwydc-chat.md) — realtime via DB polling (autoscale-safe, no WS); WebRTC mesh signaling rules; member-token auth under /public/*
 - [Email via Resend](bwydc-email.md) — test mode limits senders/recipients until domain verified; sender email stored in app_settings; stale lib dist .d.ts breaks tsc — rebuild lib packages
+- [GitHub push authentication](github-push.md) — connected GitHub App may not authenticate HTTPS git pushes; verify remote access before promising publication
