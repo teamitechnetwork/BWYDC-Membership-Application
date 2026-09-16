@@ -1,6 +1,6 @@
-# [Project name]
+# Workspace API
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A TypeScript monorepo with an Express 5 API server, PostgreSQL (Drizzle ORM), and shared libraries — ready to build on.
 
 ## Run & Operate
 
@@ -9,7 +9,9 @@ _Replace the heading above with the project's name, and this line with one sente
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+- Required env: `DATABASE_URL` — Postgres connection string (set automatically by Replit's built-in database)
+- Health check: `GET /api/healthz` → `{"status":"ok"}`
+- **Note:** `drizzle-kit` was temporarily removed from `lib/db/package.json` because it ships `tsx` which is blocked by the package firewall. Add it back when you need to run DB migrations.
 
 ## Stack
 
