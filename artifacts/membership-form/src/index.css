@@ -317,3 +317,40 @@
     inset: -1px;
   }
 }
+<<<<<<< HEAD
+
+/* Compact two-column application form styling. */
+.reference-form label {
+  color: hsl(20 8% 22%);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+}
+
+.reference-form input,
+.reference-form textarea,
+.reference-form button[role='combobox'] {
+  min-height: 2.75rem;
+  border-radius: 0;
+  border-color: hsl(0 0% 76%);
+  background: hsl(0 0% 100%);
+  box-shadow: none;
+}
+
+.reference-form input::placeholder,
+.reference-form textarea::placeholder {
+  color: hsl(0 0% 52%);
+}
+
+.reference-form input:focus-visible,
+.reference-form textarea:focus-visible,
+.reference-form button[role='combobox']:focus-visible {
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 1px hsl(var(--primary) / 0.35);
+}
+
+.reference-form [data-radix-collection-item] {
+  border-radius: 0;
+}
+=======
+>>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
