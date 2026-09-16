@@ -13,7 +13,18 @@ import { useCreateApplication, getApiBaseUrl } from '@workspace/api-client-react
 import { toast } from 'sonner';
 import { useEffect, useState, useRef } from 'react';
 import { differenceInYears } from 'date-fns';
-import { Loader2, CheckCircle2, Upload, CreditCard } from 'lucide-react';
+import {
+  ArrowRight,
+  BriefcaseBusiness,
+  CheckCircle2,
+  CreditCard,
+  Loader2,
+  MapPin,
+  ShieldCheck,
+  Sparkles,
+  Upload,
+  UserRound,
+} from 'lucide-react';
 import { LIBERIA_COUNTIES, LIBERIA_DISTRICTS } from '@/lib/liberia';
 import logoPath from '@assets/Retreat_2026__20260808_123924_0000_1786193668114.png';
 
@@ -76,7 +87,7 @@ const LOADING_MESSAGES = [
 
 export default function Home() {
   const [entryStage, setEntryStage] = useState<'loading' | 'welcome' | 'form'>('loading');
-  const [countdown, setCountdown] = useState(10);
+  const [countdown, setCountdown] = useState(3);
   const [successId, setSuccessId] = useState<number | null>(null);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const photoInputRef = useRef<HTMLInputElement>(null);
@@ -88,19 +99,12 @@ export default function Home() {
     const countdownTimer = window.setInterval(() => {
       setCountdown((current) => Math.max(0, current - 1));
     }, 1000);
-    const stageTimer = window.setTimeout(() => setEntryStage('welcome'), 10000);
+    const stageTimer = window.setTimeout(() => setEntryStage('welcome'), 3000);
 
     return () => {
       window.clearInterval(countdownTimer);
       window.clearTimeout(stageTimer);
     };
-  }, [entryStage]);
-
-  useEffect(() => {
-    if (entryStage !== 'welcome') return;
-
-    const timer = window.setTimeout(() => setEntryStage('form'), 1800);
-    return () => window.clearTimeout(timer);
   }, [entryStage]);
 
   useEffect(() => {
@@ -258,13 +262,31 @@ export default function Home() {
                 <span className="text-4xl font-bold tabular-nums text-primary">{countdown}</span>
               </div>
               <p className="mt-7 min-h-6 text-sm font-semibold text-muted-foreground" aria-live="polite">
-                {LOADING_MESSAGES[Math.floor((10 - countdown) / 3) % LOADING_MESSAGES.length]}
+                {LOADING_MESSAGES[Math.floor((3 - countdown) / 2) % LOADING_MESSAGES.length]}
               </p>
             </>
           ) : (
-            <h1 className="mt-10 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-              Welcome to BWYDC Membership
-            </h1>
+            <div className="mt-10 animate-in fade-in slide-in-from-bottom-3 duration-500">
+              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primary">BWYDC Membership</p>
+              <h1 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                Welcome — let’s get started
+              </h1>
+              <p className="mx-auto mt-4 max-w-sm text-base leading-7 text-muted-foreground">
+                A few thoughtful questions help us connect you with the right membership experience.
+              </p>
+              <Button
+                type="button"
+                size="lg"
+                className="mt-8 h-12 rounded-full px-7 text-base font-semibold shadow-lg shadow-primary/20"
+                onClick={() => {
+                  setEntryStage('form');
+                }}
+              >
+                Get started
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+              <p className="mt-4 text-xs text-muted-foreground">Takes about 5 minutes · Your information stays private</p>
+            </div>
           )}
         </section>
       </main>
@@ -316,28 +338,31 @@ export default function Home() {
   }
 
   return (
-    <div className="container max-w-3xl mx-auto py-8 px-4">
-      <div className="mb-8 text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-foreground mb-3">Membership Application</h1>
-           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Join the Bong County Women and Youth Development Cooperration. Together we build stronger communities.
+    <div className="container mx-auto max-w-5xl px-4 py-8 sm:py-12">
+      <div className="mb-8 max-w-2xl">
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+          <Sparkles className="h-3.5 w-3.5" />
+          Membership application
+        </div>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">Let’s get to know you.</h1>
+        <p className="mt-3 max-w-xl text-base leading-7 text-muted-foreground sm:text-lg">
+          Join the Bong County Women and Youth Development Cooperration. We’ll guide you through the application one easy step at a time.
         </p>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Questions marked with <span className="font-bold text-destructive">*</span> are required.
-          </p>
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 
           {/* SECTION 1: Contact Details */}
-          <Card className="border-border/50 shadow-sm overflow-hidden">
-            <div className="h-2 w-full bg-primary" />
-            <CardHeader>
-              <CardTitle>Contact Details</CardTitle>
-              <CardDescription>Your primary contact and location information.</CardDescription>
+          <Card className="overflow-hidden rounded-3xl border-border/60 shadow-lg shadow-black/[0.03]">
+            <CardHeader className="border-b border-border/50 bg-muted/20 px-6 py-7 sm:px-8">
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <MapPin className="h-5 w-5" />
+              </div>
+              <CardTitle className="text-2xl">Contact details</CardTitle>
+              <CardDescription className="mt-1 text-base">Start with the best way to reach you and where you’re based.</CardDescription>
             </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <CardContent className="grid grid-cols-1 gap-6 px-6 py-7 sm:px-8 md:grid-cols-2">
               <FormField
                 control={form.control}
                 name="fullName"
@@ -521,13 +546,15 @@ export default function Home() {
           </Card>
 
           {/* SECTION 2: Personal Profile */}
-          <Card className="border-border/50 shadow-sm overflow-hidden">
-            <div className="h-2 w-full bg-primary" />
-            <CardHeader>
-              <CardTitle>Personal Profile</CardTitle>
-              <CardDescription>Tell us a little more about yourself.</CardDescription>
+          <Card className="overflow-hidden rounded-3xl border-border/60 shadow-lg shadow-black/[0.03]">
+            <CardHeader className="border-b border-border/50 bg-muted/20 px-6 py-7 sm:px-8">
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <BriefcaseBusiness className="h-5 w-5" />
+              </div>
+              <CardTitle className="text-2xl">Your profile</CardTitle>
+              <CardDescription className="mt-1 text-base">Help us understand your background and interests.</CardDescription>
             </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <CardContent className="grid grid-cols-1 gap-6 px-6 py-7 sm:px-8 md:grid-cols-2">
               <FormField
                 control={form.control}
                 name="gender"
@@ -738,14 +765,16 @@ export default function Home() {
           </Card>
 
           {/* SECTION 3 & 4: Membership Type & Interests */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card className="border-border/50 shadow-sm overflow-hidden">
-              <div className="h-2 w-full bg-primary" />
-              <CardHeader>
-                <CardTitle>Membership Type</CardTitle>
-                <CardDescription>Select your desired membership category.</CardDescription>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <Card className="overflow-hidden rounded-3xl border-border/60 shadow-lg shadow-black/[0.03]">
+              <CardHeader className="border-b border-border/50 bg-muted/20 px-6 py-7">
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  <Sparkles className="h-5 w-5" />
+                </div>
+                <CardTitle className="text-2xl">Membership type</CardTitle>
+                <CardDescription className="mt-1 text-base">Choose the option that best fits you.</CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-4 px-6 py-7">
                 <FormField
                   control={form.control}
                   name="membershipType"
@@ -757,7 +786,7 @@ export default function Home() {
                           defaultValue={field.value}
                           className="flex flex-col space-y-3"
                         >
-                          <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 shadow-sm cursor-pointer hover:bg-muted/50 transition-colors">
+                           <FormItem className="flex cursor-pointer items-start space-x-3 space-y-0 rounded-2xl border border-border/70 p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/[0.03]">
                             <FormControl>
                               <RadioGroupItem value="individual" className="mt-1" />
                             </FormControl>
@@ -766,7 +795,7 @@ export default function Home() {
                               <FormDescription>$20 LD registration fee</FormDescription>
                             </div>
                           </FormItem>
-                          <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 shadow-sm cursor-pointer hover:bg-muted/50 transition-colors">
+                           <FormItem className="flex cursor-pointer items-start space-x-3 space-y-0 rounded-2xl border border-border/70 p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/[0.03]">
                             <FormControl>
                               <RadioGroupItem value="group" className="mt-1" />
                             </FormControl>
@@ -775,7 +804,7 @@ export default function Home() {
                               <FormDescription>For organizations and collectives</FormDescription>
                             </div>
                           </FormItem>
-                          <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 shadow-sm cursor-pointer hover:bg-muted/50 transition-colors">
+                           <FormItem className="flex cursor-pointer items-start space-x-3 space-y-0 rounded-2xl border border-border/70 p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/[0.03]">
                             <FormControl>
                               <RadioGroupItem value="associate" className="mt-1" />
                             </FormControl>
@@ -793,13 +822,15 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            <Card className="border-border/50 shadow-sm overflow-hidden">
-              <div className="h-2 w-full bg-primary" />
-              <CardHeader>
-                <CardTitle>Interest Categories</CardTitle>
-                <CardDescription>Select all areas that apply.</CardDescription>
+            <Card className="overflow-hidden rounded-3xl border-border/60 shadow-lg shadow-black/[0.03]">
+              <CardHeader className="border-b border-border/50 bg-muted/20 px-6 py-7">
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  <UserRound className="h-5 w-5" />
+                </div>
+                <CardTitle className="text-2xl">Your interests</CardTitle>
+                <CardDescription className="mt-1 text-base">Select every area you’d like to explore.</CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="px-6 py-7">
                 <FormField
                   control={form.control}
                   name="interestCategories"
@@ -824,7 +855,7 @@ export default function Home() {
                               return (
                                 <FormItem
                                   key={item.id}
-                                  className="flex flex-row items-start space-x-3 space-y-0"
+                                  className="flex cursor-pointer flex-row items-start space-x-3 space-y-0 rounded-2xl border border-transparent p-3 transition-colors hover:border-primary/20 hover:bg-primary/[0.03]"
                                 >
                                   <FormControl>
                                     <Checkbox
@@ -858,14 +889,16 @@ export default function Home() {
           </div>
 
           {/* SECTION 5: Agreement */}
-          <Card className="border-border/50 shadow-sm overflow-hidden">
-            <div className="h-2 w-full bg-primary" />
-            <CardHeader>
-              <CardTitle>Term Agreement</CardTitle>
-              <CardDescription>Please review and sign to complete your application.</CardDescription>
+          <Card className="overflow-hidden rounded-3xl border-border/60 shadow-lg shadow-black/[0.03]">
+            <CardHeader className="border-b border-border/50 bg-muted/20 px-6 py-7 sm:px-8">
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <ShieldCheck className="h-5 w-5" />
+              </div>
+              <CardTitle className="text-2xl">Review & finish</CardTitle>
+              <CardDescription className="mt-1 text-base">One last review, then you’re ready to submit.</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="bg-muted p-6 rounded-md text-sm leading-relaxed border border-border/50 italic font-serif">
+            <CardContent className="space-y-6 px-6 py-7 sm:px-8">
+              <div className="rounded-2xl border border-border/60 bg-muted/40 p-6 text-sm leading-relaxed text-muted-foreground">
                 "I hereby agree to be a member of the Bong County Women and Youth Cooperation (BWYDC). I have completed the Introductory meeting prescribed for prospective members, and I understand the purpose and/or objectives of this cooperation. I agree to: comply with the Cooperation's Guiding Principles and By-Laws; attend meetings, conferences and/or seminars; and participate in the planned savings program."
               </div>
 
@@ -911,7 +944,7 @@ export default function Home() {
                 />
               </div>
 
-              <div className="pt-4 border-t border-border space-y-6">
+              <div className="space-y-6 border-t border-border pt-6">
                 <FormField
                   control={form.control}
                   name="signatureName"
@@ -931,7 +964,7 @@ export default function Home() {
                   control={form.control}
                   name="newsletterSubscribe"
                   render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary/30 p-4 rounded-md border border-border/40">
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-2xl border border-border/50 bg-muted/30 p-4">
                       <FormControl>
                         <Checkbox
                           checked={field.value}
@@ -955,7 +988,7 @@ export default function Home() {
                   control={form.control}
                   name="agreeToTerms"
                   render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-primary/5 p-4 rounded-md border border-primary/20">
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-2xl border border-primary/25 bg-primary/[0.04] p-4">
                       <FormControl>
                         <Checkbox
                           checked={field.value}
@@ -976,25 +1009,27 @@ export default function Home() {
                 />
               </div>
             </CardContent>
-            <CardFooter className="bg-muted/50 p-6 flex justify-end border-t border-border/50">
-              <Button
-                type="submit"
-                size="lg"
-                disabled={createApplication.isPending}
-                className="w-full md:w-auto px-8 py-6 text-lg font-bold shadow-md hover:shadow-lg transition-all"
-              >
-                {createApplication.isPending ? (
-                  <>
-                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                    Submitting Application...
-                  </>
-                ) : (
-                  'Submit Application'
-                )}
-              </Button>
-            </CardFooter>
           </Card>
-
+          <div className="flex justify-end border-t border-border/60 pt-6">
+            <Button
+              type="submit"
+              size="lg"
+              disabled={createApplication.isPending}
+              className="gap-2 rounded-full px-7 shadow-md shadow-primary/15"
+            >
+              {createApplication.isPending ? (
+                <>
+                  <Loader2 className="h-5 w-5 animate-spin" />
+                  Submitting…
+                </>
+              ) : (
+                <>
+                  Submit application
+                  <ArrowRight className="h-4 w-4" />
+                </>
+              )}
+            </Button>
+          </div>
         </form>
       </Form>
     </div>
