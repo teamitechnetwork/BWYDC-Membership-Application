@@ -76,13 +76,33 @@ const EDUCATION_OPTIONS = [
 ];
 
 const LOADING_MESSAGES = [
-  'Loading Application data',
-  'Loading the best feature for you',
+  'Preparing your membership experience',
+  'Loading your application',
+  'Almost ready',
 ];
+
+const WELCOME_SEEN_KEY = 'bwydc-membership-welcome-seen';
+const LOADING_DURATION_MS = 2800;
+
+function hasSeenWelcome(): boolean {
+  try {
+    return window.localStorage.getItem(WELCOME_SEEN_KEY) === 'true';
+  } catch {
+    return false;
+  }
+}
+
+function markWelcomeAsSeen(): void {
+  try {
+    window.localStorage.setItem(WELCOME_SEEN_KEY, 'true');
+  } catch {
+    // Continue normally if browser storage is unavailable.
+  }
+}
 
 export default function Home() {
   const [entryStage, setEntryStage] = useState<'loading' | 'welcome' | 'form'>('loading');
-  const [countdown, setCountdown] = useState(3);
+  const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
   const [successId, setSuccessId] = useState<number | null>(null);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const photoInputRef = useRef<HTMLInputElement>(null);
@@ -91,13 +111,15 @@ export default function Home() {
   useEffect(() => {
     if (entryStage !== 'loading') return;
 
-    const countdownTimer = window.setInterval(() => {
-      setCountdown((current) => Math.max(0, current - 1));
-    }, 1000);
-    const stageTimer = window.setTimeout(() => setEntryStage('welcome'), 3000);
+    const messageTimer = window.setInterval(() => {
+      setLoadingMessageIndex((current) => (current + 1) % LOADING_MESSAGES.length);
+    }, 900);
+    const stageTimer = window.setTimeout(() => {
+      setEntryStage(hasSeenWelcome() ? 'form' : 'welcome');
+    }, LOADING_DURATION_MS);
 
     return () => {
-      window.clearInterval(countdownTimer);
+      window.clearInterval(messageTimer);
       window.clearTimeout(stageTimer);
     };
   }, [entryStage]);
@@ -146,7 +168,7 @@ export default function Home() {
   const handleCancel = () => {
     form.reset();
     setPhotoFile(null);
-    setEntryStage('welcome');
+    setEntryStage('form');
   };
 
   /** Convert a File to a base64 data URL */
@@ -231,8 +253,6 @@ export default function Home() {
   };
 
   if (entryStage !== 'form') {
-    const circumference = 2 * Math.PI * 54;
-
     return (
       <main className="fixed inset-0 z-[100] flex min-h-[100dvh] items-center justify-center overflow-hidden bg-background px-5 text-foreground">
         <div className="absolute inset-x-0 top-0 h-2 bg-primary" />
@@ -246,24 +266,32 @@ export default function Home() {
 
           {entryStage === 'loading' ? (
             <>
-              <div className="relative mt-10 flex h-36 w-36 items-center justify-center">
-                <svg className="absolute h-full w-full animate-spin" viewBox="0 0 120 120" role="img" aria-label="Loading application">
-                  <circle cx="60" cy="60" r="54" fill="none" stroke="hsl(var(--primary) / 0.14)" strokeWidth="7" />
+              <div className="relative mt-10 flex h-40 w-40 items-center justify-center rounded-full bg-black shadow-[0_0_0_8px_rgba(249,115,22,0.12),0_18px_50px_rgba(0,0,0,0.2)]">
+                <svg
+                  className="absolute inset-2 h-36 w-36 animate-spin"
+                  style={{ animationDuration: '2.4s' }}
+                  viewBox="0 0 120 120"
+                  role="img"
+                  aria-label="Loading application"
+                >
+                  <circle cx="60" cy="60" r="53" fill="none" stroke="rgba(255,255,255,0.14)" strokeWidth="5" />
                   <circle
                     cx="60"
                     cy="60"
-                    r="54"
+                    r="53"
                     fill="none"
                     stroke="hsl(var(--primary))"
                     strokeLinecap="round"
-                    strokeWidth="7"
-                    strokeDasharray={`${circumference * 0.72} ${circumference * 0.28}`}
+                    strokeWidth="5"
+                    strokeDasharray="190 145"
                   />
                 </svg>
-                <span className="text-4xl font-bold tabular-nums text-primary">{countdown}</span>
+                <div className="relative flex h-16 w-16 items-center justify-center rounded-full border-2 border-primary/80 bg-black shadow-inner shadow-primary/20">
+                  <span className="h-3 w-3 animate-pulse rounded-full bg-primary shadow-[0_0_18px_rgba(249,115,22,0.9)]" />
+                </div>
               </div>
               <p className="mt-7 min-h-6 text-sm font-semibold text-muted-foreground" aria-live="polite">
-                {LOADING_MESSAGES[Math.floor((3 - countdown) / 2) % LOADING_MESSAGES.length]}
+                {LOADING_MESSAGES[loadingMessageIndex]}
               </p>
             </>
           ) : (
@@ -280,6 +308,7 @@ export default function Home() {
                 size="lg"
                 className="mt-8 h-12 rounded-full px-7 text-base font-semibold shadow-lg shadow-primary/20"
                 onClick={() => {
+                  markWelcomeAsSeen();
                   setEntryStage('form');
                 }}
               >
@@ -887,7 +916,7 @@ export default function Home() {
               <CardDescription className="mt-1 text-sm">One last review, then you’re ready to submit.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6 px-0 py-6">
-              <div className="border border-black bg-black p-4 text-sm leading-relaxed text-white">
+              <div className="border border-black bg-black p-4 text-base leading-7 text-white">
                 "I hereby agree to be a member of the Bong County Women and Youth Cooperation (BWYDC). I have completed the Introductory meeting prescribed for prospective members, and I understand the purpose and/or objectives of this cooperation. I agree to: comply with the Cooperation's Guiding Principles and By-Laws; attend meetings, conferences and/or seminars; and participate in the planned savings program."
               </div>
 
