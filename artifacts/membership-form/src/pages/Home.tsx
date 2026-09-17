@@ -374,7 +374,7 @@ export default function Home() {
     <div className="min-h-full bg-white">
       <div className="container mx-auto max-w-4xl px-4 py-8 sm:py-12">
       <div className="mb-8 border-b border-border/70 pb-8 text-center">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+        <p className="mb-4 inline-flex bg-[#ff7900] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white shadow-sm sm:text-xs">
           BWYDC · Membership application
         </p>
         <h1 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
@@ -1065,33 +1065,33 @@ export default function Home() {
             </Button>
           </div>
 
-          <footer className="mt-12 overflow-hidden rounded-2xl bg-black px-3 py-7 text-white shadow-lg sm:px-6">
+          <footer className="mt-12 overflow-hidden rounded-xl bg-zinc-950 px-4 py-5 text-white shadow-lg sm:px-6 sm:py-6">
             <div className="text-center">
-              <p className="text-base font-bold text-white">Registration fee payment methods</p>
-              <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-white/70">
+              <p className="text-sm font-bold text-white sm:text-base">Registration fee payment methods</p>
+              <p className="mx-auto mt-1 max-w-xl text-xs leading-5 text-white/65 sm:text-sm">
                 Use any of these trusted payment methods when paying your registration fee.
               </p>
             </div>
-            <div className="mt-6 flex w-full flex-nowrap items-stretch gap-2 sm:gap-4">
-              <div className="flex h-20 min-w-0 flex-1 items-center justify-center overflow-hidden rounded-xl border border-black/10 bg-[#ffeb00] shadow-sm transition-shadow hover:shadow-md sm:h-24">
+            <div className="mt-4 grid w-full grid-cols-3 gap-2 sm:mt-5 sm:gap-3">
+              <div className="flex h-16 min-w-0 items-center justify-center overflow-hidden rounded-lg border border-black/10 bg-[#ffeb00] p-2 shadow-sm transition-shadow hover:shadow-md sm:h-20 sm:p-3">
                 <img
                   src={sendwaveLogoPath}
                   alt="Sendwave"
-                  className="h-full w-full rounded-xl object-contain"
+                  className="max-h-10 w-auto max-w-[88%] object-contain sm:max-h-12"
                 />
               </div>
-              <div className="flex h-20 min-w-0 flex-1 items-center justify-center overflow-hidden rounded-xl border border-black/10 bg-[#ffc20e] shadow-sm transition-shadow hover:shadow-md sm:h-24">
+              <div className="flex h-16 min-w-0 items-center justify-center overflow-hidden rounded-lg border border-black/10 bg-[#ffc20e] p-2 shadow-sm transition-shadow hover:shadow-md sm:h-20 sm:p-3">
                 <img
                   src={momoLogoPath}
                   alt="MoMo from MTN"
-                  className="h-full w-full rounded-xl object-contain"
+                  className="max-h-10 w-auto max-w-[88%] object-contain sm:max-h-12"
                 />
               </div>
-              <div className="flex h-20 min-w-0 flex-1 items-center justify-center overflow-hidden rounded-xl border border-black/10 bg-[#ff7900] shadow-sm transition-shadow hover:shadow-md sm:h-24">
+              <div className="flex h-16 min-w-0 items-center justify-center overflow-hidden rounded-lg border border-black/10 bg-[#ff7900] p-2 shadow-sm transition-shadow hover:shadow-md sm:h-20 sm:p-3">
                 <img
                   src={orangeMoneyLogoPath}
                   alt="Orange Money"
-                  className="h-full w-full rounded-xl object-contain"
+                  className="max-h-10 w-auto max-w-[92%] object-contain sm:max-h-12"
                 />
               </div>
             </div>
