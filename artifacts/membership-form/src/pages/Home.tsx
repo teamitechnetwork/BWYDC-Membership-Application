@@ -270,7 +270,7 @@ export default function Home() {
             <div className="mt-10 animate-in fade-in slide-in-from-bottom-3 duration-500">
               <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primary">BWYDC Membership</p>
               <h1 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                Welcome — let’s get started
+                Welcome, let’s get started
               </h1>
               <p className="mx-auto mt-4 max-w-sm text-base leading-7 text-muted-foreground">
                 A few thoughtful questions help us connect you with the right membership experience.
@@ -887,7 +887,7 @@ export default function Home() {
               <CardDescription className="mt-1 text-sm">One last review, then you’re ready to submit.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6 px-0 py-6">
-              <div className="border border-border/70 bg-muted/20 p-4 text-sm leading-relaxed text-muted-foreground">
+              <div className="border border-black bg-black p-4 text-sm leading-relaxed text-white">
                 "I hereby agree to be a member of the Bong County Women and Youth Cooperation (BWYDC). I have completed the Introductory meeting prescribed for prospective members, and I understand the purpose and/or objectives of this cooperation. I agree to: comply with the Cooperation's Guiding Principles and By-Laws; attend meetings, conferences and/or seminars; and participate in the planned savings program."
               </div>
 
