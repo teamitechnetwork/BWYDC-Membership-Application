@@ -266,7 +266,7 @@ export default function Home() {
 
           {entryStage === 'loading' ? (
             <>
-              <div className="relative mt-10 flex h-40 w-40 items-center justify-center rounded-full bg-black shadow-[0_0_0_8px_rgba(249,115,22,0.12),0_18px_50px_rgba(0,0,0,0.2)]">
+              <div className="relative mt-10 flex h-40 w-40 items-center justify-center rounded-full bg-background shadow-[0_0_0_8px_rgba(249,115,22,0.12),0_18px_50px_rgba(0,0,0,0.12)]">
                 <svg
                   className="absolute inset-2 h-36 w-36 animate-spin"
                   style={{ animationDuration: '2.4s' }}
@@ -274,7 +274,7 @@ export default function Home() {
                   role="img"
                   aria-label="Loading application"
                 >
-                  <circle cx="60" cy="60" r="53" fill="none" stroke="rgba(255,255,255,0.14)" strokeWidth="5" />
+                  <circle cx="60" cy="60" r="53" fill="none" stroke="rgba(0,0,0,0.14)" strokeWidth="5" />
                   <circle
                     cx="60"
                     cy="60"
@@ -286,7 +286,7 @@ export default function Home() {
                     strokeDasharray="190 145"
                   />
                 </svg>
-                <div className="relative flex h-16 w-16 items-center justify-center rounded-full border-2 border-primary/80 bg-black shadow-inner shadow-primary/20">
+                <div className="relative flex h-16 w-16 items-center justify-center rounded-full border-2 border-primary/80 bg-background shadow-inner shadow-primary/20">
                   <span className="h-3 w-3 animate-pulse rounded-full bg-primary shadow-[0_0_18px_rgba(249,115,22,0.9)]" />
                 </div>
               </div>
