@@ -1065,33 +1065,33 @@ export default function Home() {
             </Button>
           </div>
 
-          <footer className="mt-12 border-t border-border/70 pt-8">
+          <footer className="mt-12 overflow-hidden rounded-2xl bg-black px-3 py-7 text-white shadow-lg sm:px-6">
             <div className="text-center">
-              <p className="text-base font-bold text-foreground">Registration fee payment methods</p>
-              <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-muted-foreground">
+              <p className="text-base font-bold text-white">Registration fee payment methods</p>
+              <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-white/70">
                 Use any of these trusted payment methods when paying your registration fee.
               </p>
             </div>
-            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <div className="flex h-24 items-center justify-center overflow-hidden rounded-xl border border-border/70 bg-white p-3 shadow-sm transition-shadow hover:shadow-md">
+            <div className="mt-6 flex w-full flex-nowrap items-stretch gap-2 sm:gap-4">
+              <div className="flex h-20 min-w-0 flex-1 items-center justify-center overflow-hidden rounded-xl border border-white/20 bg-white p-1.5 shadow-sm transition-shadow hover:shadow-md sm:h-24 sm:p-3">
                 <img
                   src={sendwaveLogoPath}
                   alt="Sendwave"
-                  className="max-h-full w-full object-contain"
+                  className="max-h-full max-w-full object-contain"
                 />
               </div>
-              <div className="flex h-24 items-center justify-center overflow-hidden rounded-xl border border-border/70 bg-white p-3 shadow-sm transition-shadow hover:shadow-md">
+              <div className="flex h-20 min-w-0 flex-1 items-center justify-center overflow-hidden rounded-xl border border-white/20 bg-white p-1.5 shadow-sm transition-shadow hover:shadow-md sm:h-24 sm:p-3">
                 <img
                   src={momoLogoPath}
                   alt="MoMo from MTN"
-                  className="max-h-full w-full object-contain"
+                  className="max-h-full max-w-full object-contain"
                 />
               </div>
-              <div className="flex h-24 items-center justify-center overflow-hidden rounded-xl border border-border/70 bg-white p-3 shadow-sm transition-shadow hover:shadow-md">
+              <div className="flex h-20 min-w-0 flex-1 items-center justify-center overflow-hidden rounded-xl border border-white/20 bg-white p-1.5 shadow-sm transition-shadow hover:shadow-md sm:h-24 sm:p-3">
                 <img
                   src={orangeMoneyLogoPath}
                   alt="Orange Money"
-                  className="max-h-full w-full object-contain"
+                  className="max-h-full max-w-full object-contain"
                 />
               </div>
             </div>
