@@ -2,6 +2,7 @@ import { type ReactNode } from 'react';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 import logoPath from "@assets/Retreat_2026__20260808_123924_0000_1786193668114.png";
+import { CircleHelp } from 'lucide-react';
 import {
   FaFacebookF,
   FaInstagram,
@@ -26,11 +27,23 @@ export function Shell({ children }: { children: ReactNode }) {
             </div>
           </Link>
 
-          <Link href="/applications">
-            <Button variant="outline" size="sm" className="border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground font-semibold">
-              Admin
-            </Button>
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link href="/help" aria-label="Help and information">
+              <Button
+                variant="outline"
+                size="icon"
+                className="border-white/25 bg-transparent text-white hover:bg-white hover:text-black"
+                title="Help and information"
+              >
+                <CircleHelp className="h-4 w-4" />
+              </Button>
+            </Link>
+            <Link href="/applications">
+              <Button variant="outline" size="sm" className="border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground font-semibold">
+                Admin
+              </Button>
+            </Link>
+          </div>
         </div>
       </header>
 

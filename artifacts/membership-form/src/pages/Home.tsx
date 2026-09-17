@@ -108,6 +108,7 @@ export default function Home() {
   const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
   const [successId, setSuccessId] = useState<number | null>(null);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
+  const [orangeMoneyLogoFailed, setOrangeMoneyLogoFailed] = useState(false);
   const photoInputRef = useRef<HTMLInputElement>(null);
   const createApplication = useCreateApplication();
 
@@ -1087,12 +1088,22 @@ export default function Home() {
                   className="max-h-10 w-auto max-w-[88%] object-contain sm:max-h-12"
                 />
               </div>
-              <div className="flex h-16 min-w-0 items-center justify-center overflow-hidden rounded-lg border border-black/10 bg-[#ff7900] p-2 shadow-sm transition-shadow hover:shadow-md sm:h-20 sm:p-3">
-                <img
-                  src={orangeMoneyLogoPath}
-                  alt="Orange Money"
-                  className="max-h-10 w-auto max-w-[92%] object-contain sm:max-h-12"
-                />
+              <div className="flex h-16 min-w-0 items-center justify-center overflow-hidden rounded-lg border border-orange-200 bg-white p-1 shadow-sm transition-shadow hover:shadow-md sm:h-20 sm:p-2">
+                {orangeMoneyLogoFailed ? (
+                  <div className="flex items-center gap-1 text-[#ff7900]" role="img" aria-label="Orange Money">
+                    <span className="text-2xl font-black leading-none">↗</span>
+                    <span className="text-[9px] font-bold leading-[0.9] sm:text-[10px]">
+                      Orange<br />Money
+                    </span>
+                  </div>
+                ) : (
+                  <img
+                    src={orangeMoneyLogoPath}
+                    alt="Orange Money"
+                    className="block max-h-12 w-auto max-w-full object-contain sm:max-h-14"
+                    onError={() => setOrangeMoneyLogoFailed(true)}
+                  />
+                )}
               </div>
             </div>
           </footer>

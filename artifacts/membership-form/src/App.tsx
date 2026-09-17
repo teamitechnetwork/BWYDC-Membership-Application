@@ -14,6 +14,8 @@ import GroupChats from '@/pages/GroupChats';
 import ChatRoom from '@/pages/ChatRoom';
 import Login, { isAdminAuthenticated } from '@/pages/Login';
 import Welcome from '@/pages/Welcome';
+import Help from '@/pages/Help';
+import FAQs from '@/pages/FAQs';
 import { Shell } from '@/components/layout/Shell';
 import {
   Route,
@@ -58,6 +60,8 @@ function Router() {
               <Route path="/applications/:id" component={() => <AdminRoute component={ApplicationDetail} />} />
               <Route path="/forms" component={() => <AdminRoute component={FormsManager} />} />
               <Route path="/groups" component={() => <AdminRoute component={GroupChats} />} />
+              <Route path="/help" component={Help} />
+              <Route path="/faqs" component={FAQs} />
               <Route component={NotFound} />
             </Switch>
           </Shell>
