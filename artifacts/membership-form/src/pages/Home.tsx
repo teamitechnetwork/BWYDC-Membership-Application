@@ -1073,25 +1073,25 @@ export default function Home() {
               </p>
             </div>
             <div className="mt-6 flex w-full flex-nowrap items-stretch gap-2 sm:gap-4">
-              <div className="flex h-20 min-w-0 flex-1 items-center justify-center overflow-hidden rounded-xl border border-white/20 bg-white p-1.5 shadow-sm transition-shadow hover:shadow-md sm:h-24 sm:p-3">
+              <div className="flex h-20 min-w-0 flex-1 items-center justify-center overflow-hidden rounded-xl border border-black/10 bg-[#ffeb00] shadow-sm transition-shadow hover:shadow-md sm:h-24">
                 <img
                   src={sendwaveLogoPath}
                   alt="Sendwave"
-                  className="max-h-full max-w-full object-contain"
+                  className="h-full w-full rounded-xl object-contain"
                 />
               </div>
-              <div className="flex h-20 min-w-0 flex-1 items-center justify-center overflow-hidden rounded-xl border border-white/20 bg-white p-1.5 shadow-sm transition-shadow hover:shadow-md sm:h-24 sm:p-3">
+              <div className="flex h-20 min-w-0 flex-1 items-center justify-center overflow-hidden rounded-xl border border-black/10 bg-[#ffc20e] shadow-sm transition-shadow hover:shadow-md sm:h-24">
                 <img
                   src={momoLogoPath}
                   alt="MoMo from MTN"
-                  className="max-h-full max-w-full object-contain"
+                  className="h-full w-full rounded-xl object-contain"
                 />
               </div>
-              <div className="flex h-20 min-w-0 flex-1 items-center justify-center overflow-hidden rounded-xl border border-white/20 bg-white p-1.5 shadow-sm transition-shadow hover:shadow-md sm:h-24 sm:p-3">
+              <div className="flex h-20 min-w-0 flex-1 items-center justify-center overflow-hidden rounded-xl border border-black/10 bg-[#ff7900] shadow-sm transition-shadow hover:shadow-md sm:h-24">
                 <img
                   src={orangeMoneyLogoPath}
                   alt="Orange Money"
-                  className="max-h-full max-w-full object-contain"
+                  className="h-full w-full rounded-xl object-contain"
                 />
               </div>
             </div>
