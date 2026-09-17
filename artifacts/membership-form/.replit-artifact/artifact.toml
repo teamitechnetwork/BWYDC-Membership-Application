@@ -1,11 +1,7 @@
 kind = "web"
 previewPath = "/"
 title = "BWYDC Membership Application"
-<<<<<<< HEAD
 description = "A digital membership application for Bong County Women and Youth Development Cooperation members."
-=======
-description = "A digital membership application form for the Bong County Women and Youth Development Cooperations (BWYDC). Allows prospective members to fill out and submit their membership application online, covering personal details, membership type, interest categories, and a signed term agreement."
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
 version = "1.0.0"
 id = "artifacts/membership-form"
 router = "path"

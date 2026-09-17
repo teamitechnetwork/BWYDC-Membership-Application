@@ -13,7 +13,6 @@ import { useCreateApplication, getApiBaseUrl } from '@workspace/api-client-react
 import { toast } from 'sonner';
 import { useEffect, useState, useRef } from 'react';
 import { differenceInYears } from 'date-fns';
-<<<<<<< HEAD
 import {
   ArrowRight,
   CheckCircle2,
@@ -21,9 +20,6 @@ import {
   Loader2,
   Upload,
 } from 'lucide-react';
-=======
-import { Loader2, CheckCircle2, Upload, CreditCard } from 'lucide-react';
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
 import { LIBERIA_COUNTIES, LIBERIA_DISTRICTS } from '@/lib/liberia';
 import logoPath from '@assets/Retreat_2026__20260808_123924_0000_1786193668114.png';
 
@@ -86,11 +82,7 @@ const LOADING_MESSAGES = [
 
 export default function Home() {
   const [entryStage, setEntryStage] = useState<'loading' | 'welcome' | 'form'>('loading');
-<<<<<<< HEAD
   const [countdown, setCountdown] = useState(3);
-=======
-  const [countdown, setCountdown] = useState(10);
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
   const [successId, setSuccessId] = useState<number | null>(null);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const photoInputRef = useRef<HTMLInputElement>(null);
@@ -102,11 +94,7 @@ export default function Home() {
     const countdownTimer = window.setInterval(() => {
       setCountdown((current) => Math.max(0, current - 1));
     }, 1000);
-<<<<<<< HEAD
     const stageTimer = window.setTimeout(() => setEntryStage('welcome'), 3000);
-=======
-    const stageTimer = window.setTimeout(() => setEntryStage('welcome'), 10000);
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
 
     return () => {
       window.clearInterval(countdownTimer);
@@ -115,16 +103,6 @@ export default function Home() {
   }, [entryStage]);
 
   useEffect(() => {
-<<<<<<< HEAD
-=======
-    if (entryStage !== 'welcome') return;
-
-    const timer = window.setTimeout(() => setEntryStage('form'), 1800);
-    return () => window.clearTimeout(timer);
-  }, [entryStage]);
-
-  useEffect(() => {
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
     if (entryStage === 'form') return;
 
     const previousOverflow = document.body.style.overflow;
@@ -165,15 +143,12 @@ export default function Home() {
     },
   });
 
-<<<<<<< HEAD
   const handleCancel = () => {
     form.reset();
     setPhotoFile(null);
     setEntryStage('welcome');
   };
 
-=======
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
   /** Convert a File to a base64 data URL */
   const fileToDataUrl = (file: File): Promise<string> =>
     new Promise((resolve, reject) => {
@@ -288,7 +263,6 @@ export default function Home() {
                 <span className="text-4xl font-bold tabular-nums text-primary">{countdown}</span>
               </div>
               <p className="mt-7 min-h-6 text-sm font-semibold text-muted-foreground" aria-live="polite">
-<<<<<<< HEAD
                 {LOADING_MESSAGES[Math.floor((3 - countdown) / 2) % LOADING_MESSAGES.length]}
               </p>
             </>
@@ -314,15 +288,6 @@ export default function Home() {
               </Button>
               <p className="mt-4 text-xs text-muted-foreground">Takes about 5 minutes · Your information stays private</p>
             </div>
-=======
-                {LOADING_MESSAGES[Math.floor((10 - countdown) / 3) % LOADING_MESSAGES.length]}
-              </p>
-            </>
-          ) : (
-            <h1 className="mt-10 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-              Welcome to BWYDC Membership
-            </h1>
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
           )}
         </section>
       </main>
@@ -374,7 +339,6 @@ export default function Home() {
   }
 
   return (
-<<<<<<< HEAD
     <div className="min-h-full bg-white">
       <div className="container mx-auto max-w-4xl px-4 py-8 sm:py-12">
       <div className="mb-8 border-b border-border/70 pb-8 text-center">
@@ -400,30 +364,6 @@ export default function Home() {
               <CardDescription className="mt-1 text-sm">Your primary contact and location information.</CardDescription>
             </CardHeader>
             <CardContent className="grid grid-cols-1 gap-x-5 gap-y-4 px-0 py-6 sm:grid-cols-2">
-=======
-    <div className="container max-w-3xl mx-auto py-8 px-4">
-      <div className="mb-8 text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-foreground mb-3">Membership Application</h1>
-           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Join the Bong County Women and Youth Development Cooperration. Together we build stronger communities.
-        </p>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Questions marked with <span className="font-bold text-destructive">*</span> are required.
-          </p>
-      </div>
-
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-
-          {/* SECTION 1: Contact Details */}
-          <Card className="border-border/50 shadow-sm overflow-hidden">
-            <div className="h-2 w-full bg-primary" />
-            <CardHeader>
-              <CardTitle>Contact Details</CardTitle>
-              <CardDescription>Your primary contact and location information.</CardDescription>
-            </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
               <FormField
                 control={form.control}
                 name="fullName"
@@ -607,22 +547,12 @@ export default function Home() {
           </Card>
 
           {/* SECTION 2: Personal Profile */}
-<<<<<<< HEAD
           <Card className="overflow-visible rounded-none border-0 bg-transparent shadow-none">
             <CardHeader className="border-b border-border/70 px-0 py-0 pb-3">
               <CardTitle className="text-lg font-bold">Personal profile</CardTitle>
               <CardDescription className="mt-1 text-sm">A few details about your background.</CardDescription>
             </CardHeader>
             <CardContent className="grid grid-cols-1 gap-x-5 gap-y-4 px-0 py-6 sm:grid-cols-2">
-=======
-          <Card className="border-border/50 shadow-sm overflow-hidden">
-            <div className="h-2 w-full bg-primary" />
-            <CardHeader>
-              <CardTitle>Personal Profile</CardTitle>
-              <CardDescription>Tell us a little more about yourself.</CardDescription>
-            </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
               <FormField
                 control={form.control}
                 name="gender"
@@ -654,11 +584,7 @@ export default function Home() {
                 )}
               />
 
-<<<<<<< HEAD
               <div className="space-y-0 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-4">
-=======
-              <div className="space-y-0 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
                 <FormField
                   control={form.control}
                   name="dateOfBirth"
@@ -837,7 +763,6 @@ export default function Home() {
           </Card>
 
           {/* SECTION 3 & 4: Membership Type & Interests */}
-<<<<<<< HEAD
           <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2">
             <Card className="overflow-visible rounded-none border-0 bg-transparent shadow-none">
               <CardHeader className="border-b border-border/70 px-0 py-0 pb-3">
@@ -845,16 +770,6 @@ export default function Home() {
                 <CardDescription className="mt-1 text-sm">Choose the option that best fits you.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4 px-0 py-6">
-=======
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card className="border-border/50 shadow-sm overflow-hidden">
-              <div className="h-2 w-full bg-primary" />
-              <CardHeader>
-                <CardTitle>Membership Type</CardTitle>
-                <CardDescription>Select your desired membership category.</CardDescription>
-              </CardHeader>
-              <CardContent>
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
                 <FormField
                   control={form.control}
                   name="membershipType"
@@ -866,11 +781,7 @@ export default function Home() {
                           defaultValue={field.value}
                           className="flex flex-col space-y-3"
                         >
-<<<<<<< HEAD
                            <FormItem className="flex cursor-pointer items-start space-x-3 space-y-0 rounded-none border border-border/70 bg-white p-3 transition-colors hover:border-primary/40 hover:bg-primary/[0.03]">
-=======
-                          <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 shadow-sm cursor-pointer hover:bg-muted/50 transition-colors">
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
                             <FormControl>
                               <RadioGroupItem value="individual" className="mt-1" />
                             </FormControl>
@@ -879,11 +790,7 @@ export default function Home() {
                               <FormDescription>$20 LD registration fee</FormDescription>
                             </div>
                           </FormItem>
-<<<<<<< HEAD
                            <FormItem className="flex cursor-pointer items-start space-x-3 space-y-0 rounded-none border border-border/70 bg-white p-3 transition-colors hover:border-primary/40 hover:bg-primary/[0.03]">
-=======
-                          <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 shadow-sm cursor-pointer hover:bg-muted/50 transition-colors">
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
                             <FormControl>
                               <RadioGroupItem value="group" className="mt-1" />
                             </FormControl>
@@ -892,11 +799,7 @@ export default function Home() {
                               <FormDescription>For organizations and collectives</FormDescription>
                             </div>
                           </FormItem>
-<<<<<<< HEAD
                            <FormItem className="flex cursor-pointer items-start space-x-3 space-y-0 rounded-none border border-border/70 bg-white p-3 transition-colors hover:border-primary/40 hover:bg-primary/[0.03]">
-=======
-                          <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 shadow-sm cursor-pointer hover:bg-muted/50 transition-colors">
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
                             <FormControl>
                               <RadioGroupItem value="associate" className="mt-1" />
                             </FormControl>
@@ -914,22 +817,12 @@ export default function Home() {
               </CardContent>
             </Card>
 
-<<<<<<< HEAD
             <Card className="overflow-visible rounded-none border-0 bg-transparent shadow-none">
               <CardHeader className="border-b border-border/70 px-0 py-0 pb-3">
                 <CardTitle className="text-lg font-bold">Your interests</CardTitle>
                 <CardDescription className="mt-1 text-sm">Select every area you’d like to explore.</CardDescription>
               </CardHeader>
               <CardContent className="px-0 py-6">
-=======
-            <Card className="border-border/50 shadow-sm overflow-hidden">
-              <div className="h-2 w-full bg-primary" />
-              <CardHeader>
-                <CardTitle>Interest Categories</CardTitle>
-                <CardDescription>Select all areas that apply.</CardDescription>
-              </CardHeader>
-              <CardContent>
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
                 <FormField
                   control={form.control}
                   name="interestCategories"
@@ -954,11 +847,7 @@ export default function Home() {
                               return (
                                 <FormItem
                                   key={item.id}
-<<<<<<< HEAD
                                   className="flex cursor-pointer flex-row items-start space-x-3 space-y-0 rounded-none border border-transparent p-2 transition-colors hover:border-primary/20 hover:bg-primary/[0.03]"
-=======
-                                  className="flex flex-row items-start space-x-3 space-y-0"
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
                                 >
                                   <FormControl>
                                     <Checkbox
@@ -992,7 +881,6 @@ export default function Home() {
           </div>
 
           {/* SECTION 5: Agreement */}
-<<<<<<< HEAD
           <Card className="overflow-visible rounded-none border-0 bg-transparent shadow-none">
             <CardHeader className="border-b border-border/70 px-0 py-0 pb-3">
               <CardTitle className="text-lg font-bold">Review & finish</CardTitle>
@@ -1000,16 +888,6 @@ export default function Home() {
             </CardHeader>
             <CardContent className="space-y-6 px-0 py-6">
               <div className="border border-border/70 bg-muted/20 p-4 text-sm leading-relaxed text-muted-foreground">
-=======
-          <Card className="border-border/50 shadow-sm overflow-hidden">
-            <div className="h-2 w-full bg-primary" />
-            <CardHeader>
-              <CardTitle>Term Agreement</CardTitle>
-              <CardDescription>Please review and sign to complete your application.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="bg-muted p-6 rounded-md text-sm leading-relaxed border border-border/50 italic font-serif">
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
                 "I hereby agree to be a member of the Bong County Women and Youth Cooperation (BWYDC). I have completed the Introductory meeting prescribed for prospective members, and I understand the purpose and/or objectives of this cooperation. I agree to: comply with the Cooperation's Guiding Principles and By-Laws; attend meetings, conferences and/or seminars; and participate in the planned savings program."
               </div>
 
@@ -1055,11 +933,7 @@ export default function Home() {
                 />
               </div>
 
-<<<<<<< HEAD
               <div className="space-y-6 border-t border-border pt-6">
-=======
-              <div className="pt-4 border-t border-border space-y-6">
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
                 <FormField
                   control={form.control}
                   name="signatureName"
@@ -1079,11 +953,7 @@ export default function Home() {
                   control={form.control}
                   name="newsletterSubscribe"
                   render={({ field }) => (
-<<<<<<< HEAD
                     <FormItem className="flex flex-row items-start space-x-3 space-y-0 border border-border/70 bg-white p-3">
-=======
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary/30 p-4 rounded-md border border-border/40">
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
                       <FormControl>
                         <Checkbox
                           checked={field.value}
@@ -1107,11 +977,7 @@ export default function Home() {
                   control={form.control}
                   name="agreeToTerms"
                   render={({ field }) => (
-<<<<<<< HEAD
                     <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-2xl border border-primary/25 bg-primary/[0.04] p-4">
-=======
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-primary/5 p-4 rounded-md border border-primary/20">
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
                       <FormControl>
                         <Checkbox
                           checked={field.value}
@@ -1132,7 +998,6 @@ export default function Home() {
                 />
               </div>
             </CardContent>
-<<<<<<< HEAD
           </Card>
           <div className="flex flex-col-reverse gap-3 border-t border-border/60 pt-6 sm:flex-row sm:items-center sm:justify-between">
             <Button
@@ -1168,29 +1033,5 @@ export default function Home() {
       </Form>
     </div>
     </div>
-=======
-            <CardFooter className="bg-muted/50 p-6 flex justify-end border-t border-border/50">
-              <Button
-                type="submit"
-                size="lg"
-                disabled={createApplication.isPending}
-                className="w-full md:w-auto px-8 py-6 text-lg font-bold shadow-md hover:shadow-lg transition-all"
-              >
-                {createApplication.isPending ? (
-                  <>
-                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                    Submitting Application...
-                  </>
-                ) : (
-                  'Submit Application'
-                )}
-              </Button>
-            </CardFooter>
-          </Card>
-
-        </form>
-      </Form>
-    </div>
->>>>>>> 422b1bdb6688106d7be96cc9dfee1c3d080a0327
   );
 }
