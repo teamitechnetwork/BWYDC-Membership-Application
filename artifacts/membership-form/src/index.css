@@ -127,7 +127,7 @@
   --chart-4: 38 90% 55%;     /* amber */
   --chart-5: 0 84% 60%;      /* red */
 
-  --app-font-sans: 'Inter', sans-serif;
+  --app-font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --app-font-serif: Georgia, serif;
   --app-font-mono: Menlo, monospace;
   --radius: 0.5rem;
