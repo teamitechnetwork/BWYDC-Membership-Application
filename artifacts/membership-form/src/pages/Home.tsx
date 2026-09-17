@@ -22,6 +22,9 @@ import {
 } from 'lucide-react';
 import { LIBERIA_COUNTIES, LIBERIA_DISTRICTS } from '@/lib/liberia';
 import logoPath from '@assets/Retreat_2026__20260808_123924_0000_1786193668114.png';
+import sendwaveLogoPath from '@assets/payment-sendwave.png';
+import momoLogoPath from '@assets/payment-momo-mtn.png';
+import orangeMoneyLogoPath from '@assets/payment-orange-money.png';
 
 const formSchema = z.object({
   fullName: z.string().min(2, 'Full name is required'),
@@ -379,6 +382,9 @@ export default function Home() {
         </h1>
         <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-muted-foreground sm:text-base">
           Tell us about yourself and how you would like to take part in the Bong County Women and Youth Development Cooperation.
+        </p>
+        <p className="mt-4 text-sm font-medium text-muted-foreground">
+          <span className="text-destructive">*</span> Questions marked with * are required.
         </p>
         <div className="mx-auto mt-6 h-1 w-14 bg-primary" aria-hidden="true" />
       </div>
@@ -1058,6 +1064,38 @@ export default function Home() {
               )}
             </Button>
           </div>
+
+          <footer className="mt-12 border-t border-border/70 pt-8">
+            <div className="text-center">
+              <p className="text-base font-bold text-foreground">Registration fee payment methods</p>
+              <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-muted-foreground">
+                Use any of these trusted payment methods when paying your registration fee.
+              </p>
+            </div>
+            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <div className="flex h-24 items-center justify-center overflow-hidden rounded-xl border border-border/70 bg-white p-3 shadow-sm transition-shadow hover:shadow-md">
+                <img
+                  src={sendwaveLogoPath}
+                  alt="Sendwave"
+                  className="max-h-full w-full object-contain"
+                />
+              </div>
+              <div className="flex h-24 items-center justify-center overflow-hidden rounded-xl border border-border/70 bg-white p-3 shadow-sm transition-shadow hover:shadow-md">
+                <img
+                  src={momoLogoPath}
+                  alt="MoMo from MTN"
+                  className="max-h-full w-full object-contain"
+                />
+              </div>
+              <div className="flex h-24 items-center justify-center overflow-hidden rounded-xl border border-border/70 bg-white p-3 shadow-sm transition-shadow hover:shadow-md">
+                <img
+                  src={orangeMoneyLogoPath}
+                  alt="Orange Money"
+                  className="max-h-full w-full object-contain"
+                />
+              </div>
+            </div>
+          </footer>
         </form>
       </Form>
     </div>
