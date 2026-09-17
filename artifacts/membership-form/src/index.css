@@ -320,7 +320,7 @@
 /* Compact two-column application form styling. */
 .reference-form label {
   color: hsl(20 8% 22%);
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1.25rem;
 }
@@ -328,6 +328,7 @@
 .reference-form input,
 .reference-form textarea,
 .reference-form button[role='combobox'] {
+  font-size: 1rem;
   min-height: 2.75rem;
   border-radius: 0;
   border-color: hsl(0 0% 76%);
@@ -349,4 +350,25 @@
 
 .reference-form [data-radix-collection-item] {
   border-radius: 0;
+}
+
+/* Keep the complete application form comfortably readable, not just the agreement. */
+.reference-form {
+  font-size: 1rem;
+}
+
+.reference-form .text-sm {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.reference-form .text-xs {
+  font-size: 0.9rem;
+  line-height: 1.25rem;
+}
+
+.reference-form [id$='-form-item-description'],
+.reference-form [id$='-form-item-message'] {
+  font-size: 0.9rem;
+  line-height: 1.25rem;
 }
