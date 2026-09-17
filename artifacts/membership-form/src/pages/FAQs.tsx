@@ -70,8 +70,8 @@ export default function FAQs() {
             </div>
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Need to know</p>
-              <h1 className="mt-2 text-3xl font-extrabold tracking-tight sm:text-5xl">Frequently asked questions</h1>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-white/70">
+              <h1 className="mt-2 text-4xl font-extrabold tracking-tight sm:text-6xl">Frequently asked questions</h1>
+              <p className="mt-4 max-w-2xl text-lg leading-8 text-white/70 sm:text-xl">
                 Quick answers about BWYDC&apos;s purpose, programs, membership, and community work.
               </p>
             </div>
@@ -84,10 +84,10 @@ export default function FAQs() {
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
               <AccordionItem key={faq.question} value={`faq-${index}`}>
-                <AccordionTrigger className="py-5 text-left text-base font-semibold hover:no-underline">
+                <AccordionTrigger className="py-5 text-left text-lg font-semibold hover:no-underline">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="max-w-3xl text-sm leading-7 text-muted-foreground">
+                <AccordionContent className="max-w-3xl text-base leading-8 text-muted-foreground">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -98,7 +98,7 @@ export default function FAQs() {
         <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-xl bg-primary/10 px-5 py-5 text-center sm:flex-row sm:text-left">
           <div>
             <p className="font-semibold">Ready to join the cooperation?</p>
-            <p className="mt-1 text-sm text-muted-foreground">Start your BWYDC membership application.</p>
+            <p className="mt-1 text-base text-muted-foreground">Start your BWYDC membership application.</p>
           </div>
           <Link href="/">
             <Button className="gap-2">

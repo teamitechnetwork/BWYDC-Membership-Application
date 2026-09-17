@@ -1,6 +1,7 @@
 import { type ReactNode } from 'react';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
+import { FloatingChatbot } from '@/components/FloatingChatbot';
 import logoPath from "@assets/Retreat_2026__20260808_123924_0000_1786193668114.png";
 import { CircleHelp } from 'lucide-react';
 import {
@@ -89,6 +90,7 @@ export function Shell({ children }: { children: ReactNode }) {
           </div>
         </div>
       </footer>
+      <FloatingChatbot />
     </div>
   );
 }
