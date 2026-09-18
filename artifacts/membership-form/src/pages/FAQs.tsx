@@ -1,6 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'wouter';
-import { ArrowLeft, ChevronRight, CircleHelp } from 'lucide-react';
+import {
+  ArrowLeft,
+  ChevronRight,
+  CircleHelp,
+  Pause,
+  Play,
+  Square,
+  Volume2,
+  VolumeX,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 type Question = {
@@ -275,18 +284,96 @@ export default function FAQs() {
   const [categoryIndex, setCategoryIndex] = useState(0);
   const [topicIndex, setTopicIndex] = useState(0);
   const [selectedQuestion, setSelectedQuestion] = useState<string | null>(null);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isSpeechPaused, setIsSpeechPaused] = useState(false);
+  const [speechSupported, setSpeechSupported] = useState(false);
+  const speechRef = useRef<SpeechSynthesisUtterance | null>(null);
   const category = categories[categoryIndex];
   const topic = category.topics[topicIndex];
 
+  useEffect(() => {
+    setSpeechSupported('speechSynthesis' in window && 'SpeechSynthesisUtterance' in window);
+
+    return () => {
+      window.speechSynthesis?.cancel();
+    };
+  }, []);
+
+  const stopSpeaking = () => {
+    window.speechSynthesis?.cancel();
+    speechRef.current = null;
+    setIsSpeaking(false);
+    setIsSpeechPaused(false);
+  };
+
+  const speakAnswer = (item: Question) => {
+    if (!speechSupported) return;
+
+    stopSpeaking();
+    const utterance = new SpeechSynthesisUtterance(`${item.question}. ${item.answer}`);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.95;
+    utterance.pitch = 1;
+    utterance.onstart = () => {
+      setIsSpeaking(true);
+      setIsSpeechPaused(false);
+    };
+    utterance.onend = () => {
+      speechRef.current = null;
+      setIsSpeaking(false);
+      setIsSpeechPaused(false);
+    };
+    utterance.onerror = () => {
+      speechRef.current = null;
+      setIsSpeaking(false);
+      setIsSpeechPaused(false);
+    };
+
+    speechRef.current = utterance;
+    window.speechSynthesis.speak(utterance);
+  };
+
+  const toggleSpeech = () => {
+    if (!speechSupported || !selectedQuestion) return;
+
+    if (isSpeaking && !isSpeechPaused) {
+      window.speechSynthesis.pause();
+      setIsSpeechPaused(true);
+      return;
+    }
+
+    if (isSpeaking && isSpeechPaused) {
+      window.speechSynthesis.resume();
+      setIsSpeechPaused(false);
+      return;
+    }
+
+    const selectedItem = topic.questions.find((item) => item.question === selectedQuestion);
+    if (selectedItem) speakAnswer(selectedItem);
+  };
+
   const selectCategory = (index: number) => {
+    stopSpeaking();
     setCategoryIndex(index);
     setTopicIndex(0);
     setSelectedQuestion(null);
   };
 
   const selectTopic = (index: number) => {
+    stopSpeaking();
     setTopicIndex(index);
     setSelectedQuestion(null);
+  };
+
+  const selectQuestion = (item: Question) => {
+    if (selectedQuestion === item.question) {
+      stopSpeaking();
+      setSelectedQuestion(null);
+      return;
+    }
+
+    stopSpeaking();
+    setSelectedQuestion(item.question);
   };
 
   return (
@@ -318,6 +405,45 @@ export default function FAQs() {
             <h2 className="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">Choose a topic</h2>
           </div>
           <p className="hidden text-sm text-muted-foreground sm:block">Select a question to read the answer.</p>
+        </div>
+
+        <div className="mb-8 flex flex-col gap-4 border border-primary/20 bg-primary/5 p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-6">
+          <div className="flex items-start gap-3">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-white">
+              {speechSupported ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
+            </div>
+            <div>
+              <p className="font-bold text-zinc-950">Listen to an answer</p>
+              <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                Select a question, then use the voice controls to hear the answer read aloud.
+                {!speechSupported && ' Voice playback is not available in this browser.'}
+              </p>
+            </div>
+          </div>
+          <div className="flex shrink-0 items-center gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              className="gap-2 border-primary/30 bg-white"
+              onClick={toggleSpeech}
+              disabled={!speechSupported || !selectedQuestion}
+              aria-label={isSpeaking && !isSpeechPaused ? 'Pause answer' : 'Listen to answer'}
+            >
+              {isSpeaking && !isSpeechPaused ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+              {isSpeaking && !isSpeechPaused ? 'Pause' : isSpeechPaused ? 'Resume' : 'Listen'}
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={stopSpeaking}
+              disabled={!isSpeaking}
+              aria-label="Stop answer playback"
+              title="Stop playback"
+            >
+              <Square className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
 
         <div className="grid items-start gap-4 lg:grid-cols-3">
@@ -374,8 +500,10 @@ export default function FAQs() {
                 <button
                   key={item.question}
                   type="button"
-                  onClick={() => setSelectedQuestion(selectedQuestion === item.question ? null : item.question)}
-                  className="flex min-h-16 w-full items-center justify-between gap-3 px-5 py-4 text-left text-base font-semibold text-zinc-900 transition-colors hover:bg-orange-50"
+                  onClick={() => selectQuestion(item)}
+                  className={`flex min-h-16 w-full items-center justify-between gap-3 px-5 py-4 text-left text-base font-semibold transition-colors ${
+                    selectedQuestion === item.question ? 'bg-primary/10 text-primary' : 'text-zinc-900 hover:bg-orange-50'
+                  }`}
                   aria-expanded={selectedQuestion === item.question}
                 >
                   <span>{item.question}</span>
@@ -385,7 +513,15 @@ export default function FAQs() {
             </div>
             {selectedQuestion && (
               <div className="border-t-4 border-primary bg-black px-5 py-5 text-base leading-8 text-white/85">
-                {topic.questions.find((item) => item.question === selectedQuestion)?.answer}
+                <div className="flex items-start gap-3">
+                  <Volume2 className={`mt-1 h-5 w-5 shrink-0 ${isSpeaking ? 'text-primary' : 'text-white/50'}`} aria-hidden="true" />
+                  <div>
+                    {topic.questions.find((item) => item.question === selectedQuestion)?.answer}
+                    <p className="mt-4 text-xs font-semibold uppercase tracking-[0.16em] text-white/45" aria-live="polite">
+                      {isSpeaking ? (isSpeechPaused ? 'Voice answer paused' : 'Reading this answer aloud') : 'Answer selected'}
+                    </p>
+                  </div>
+                </div>
               </div>
             )}
           </section>
