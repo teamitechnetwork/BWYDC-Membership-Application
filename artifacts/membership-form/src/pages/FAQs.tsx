@@ -23,21 +23,32 @@ const categories: Category[] = [
     label: 'About BWYDC',
     topics: [
       {
-        label: 'Who we are',
+        label: 'Identity & history',
         questions: [
+          {
+            question: 'What does BWYDC stand for?',
+            answer:
+              'BWYDC stands for the Bong County Women and Youth Development Cooperation.',
+          },
           {
             question: 'What is BWYDC?',
             answer:
-              'The Bong County Women and Youth Development Cooperation (BWYDC) is a community-centered initiative that advances grassroots empowerment for women, girls, and youth in Bong County and Central Liberia.',
+              'BWYDC is a community-centered initiative that advances grassroots empowerment for women, girls, and youth in Bong County and Central Liberia.',
           },
           {
             question: 'When and where was BWYDC launched?',
-            answer: 'BWYDC was officially launched in June 2023 in Gbarnga, Bong County, Liberia.',
+            answer:
+              'BWYDC was officially launched in June 2023 in Gbarnga, Bong County, Liberia.',
           },
           {
             question: 'Who does BWYDC serve?',
             answer:
               'BWYDC focuses on women, girls, youth, and local community groups. Its work is designed to strengthen their resources, leadership skills, participation, and financial autonomy.',
+          },
+          {
+            question: 'Is BWYDC focused only on one community?',
+            answer:
+              'BWYDC is rooted in Bong County and works across Central Liberia. Its county-level networks and forums connect people and groups across all 14 administrative districts of Bong County.',
           },
         ],
       },
@@ -50,9 +61,19 @@ const categories: Category[] = [
               'BWYDC works to increase the social, political, and economic agency of women, girls, and youth by connecting local groups with resources, leadership skills, and financial autonomy for socio-economic justice and lasting peace.',
           },
           {
-            question: 'What is the relationship with B4P CODEFOUND?',
+            question: 'Why was BWYDC created?',
             answer:
-              'BWYDC was established by the Business for Peace Community Development Foundation (B4P CODEFOUND). It is the foundation’s flagship regional model for decentralizing development activities in Africa.',
+              'BWYDC provides a local framework for turning development goals into community action. It connects people with resources, learning, dialogue, and opportunities that support stronger livelihoods, participation, justice, and peace.',
+          },
+          {
+            question: 'What does BWYDC mean by community empowerment?',
+            answer:
+              'Community empowerment means helping women, girls, youth, and local groups build resources, leadership skills, financial autonomy, and a stronger voice in social, political, and economic decisions.',
+          },
+          {
+            question: 'How does BWYDC promote lasting peace?',
+            answer:
+              'BWYDC combines social cohesion work, intergenerational dialogue, conflict transformation, civic leadership, and access-to-justice conversations to help communities build more peaceful relationships.',
           },
         ],
       },
@@ -62,37 +83,122 @@ const categories: Category[] = [
     label: 'Programs & impact',
     topics: [
       {
-        label: 'Economic justice',
+        label: 'Four program areas',
         questions: [
           {
-            question: 'How does BWYDC support economic opportunity?',
-            answer:
-              'The cooperation expands access to agribusiness, entrepreneurship tools, and direct business development so local groups can build stronger and more independent livelihoods.',
-          },
-          {
-            question: 'What are the four main program areas?',
+            question: 'What are BWYDC’s four main program areas?',
             answer:
               'The four areas are economic justice; leadership and education; social cohesion; and youth advocacy. Together they cover entrepreneurship, civic leadership, conflict transformation, community peace, and youth protection.',
+          },
+          {
+            question: 'What is included in economic justice?',
+            answer:
+              'Economic justice includes expanding access to agribusiness, entrepreneurship tools, and direct business development so local groups can build stronger and more independent livelihoods.',
+          },
+          {
+            question: 'What happens through leadership and education?',
+            answer:
+              'This area builds capacity for civic leadership, conflict transformation, and community governance so people can participate more meaningfully in decisions that affect their communities.',
+          },
+          {
+            question: 'What is social cohesion work?',
+            answer:
+              'BWYDC creates intergenerational dialogue and county-level networks that support community peace, mutual understanding, and stronger local relationships.',
+          },
+          {
+            question: 'What does youth advocacy address?',
+            answer:
+              'Youth advocacy includes community work to combat substance abuse and drug trafficking among local youth, alongside leadership and education opportunities.',
           },
         ],
       },
       {
-        label: 'Community & youth',
+        label: 'Community action',
         questions: [
-          {
-            question: 'How does BWYDC build social cohesion?',
-            answer:
-              'BWYDC creates intergenerational dialogue and county-level networks that support community peace and stronger local relationships.',
-          },
-          {
-            question: 'How does BWYDC support youth advocacy?',
-            answer:
-              'Youth advocacy includes community work to combat substance abuse and drug trafficking among local youth, alongside leadership and education opportunities.',
-          },
           {
             question: 'How does BWYDC work across Bong County?',
             answer:
               'BWYDC coordinates local and hybrid forums and builds county-level networks. Its dialogue work brings representatives from all 14 administrative districts together to discuss access to justice and equal rights.',
+          },
+          {
+            question: 'What kinds of conversations do BWYDC forums support?',
+            answer:
+              'The forums support conversations about access to justice, equal rights, community peace, and the needs of women, girls, and youth across Bong County.',
+          },
+          {
+            question: 'How does BWYDC support women and girls?',
+            answer:
+              'BWYDC connects women and girls with resources, leadership development, participation opportunities, and pathways toward greater social, political, and economic agency.',
+          },
+          {
+            question: 'How can young people take part?',
+            answer:
+              'Young people can apply for membership and explore leadership, education, youth advocacy, community dialogue, and other opportunities offered through BWYDC’s work.',
+          },
+          {
+            question: 'What local problems does BWYDC respond to?',
+            answer:
+              'BWYDC responds to gaps in legal, social, and economic opportunity, including the need for stronger livelihoods, civic participation, community peace, and protection for young people.',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'B4P CODEFOUND',
+    topics: [
+      {
+        label: 'Parent organization',
+        questions: [
+          {
+            question: 'What does B4P CODEFOUND stand for?',
+            answer:
+              'B4P CODEFOUND is the Business for Peace Community Development Foundation.',
+          },
+          {
+            question: 'Who is B4P CODEFOUND?',
+            answer:
+              'B4P CODEFOUND is a registered non-profit operating in Liberia and the United States. It works to advance community development and uses BWYDC as its flagship regional model.',
+          },
+          {
+            question: 'Who founded B4P CODEFOUND?',
+            answer:
+              'B4P CODEFOUND was founded by Mrs. Lindora Howard-Diawara.',
+          },
+          {
+            question: 'Where does B4P CODEFOUND operate?',
+            answer:
+              'B4P CODEFOUND operates in Liberia and the United States. BWYDC is its flagship regional model for development activities in Africa.',
+          },
+          {
+            question: 'What does B4P CODEFOUND focus on?',
+            answer:
+              'B4P CODEFOUND focuses on business for peace and community development. Its work connects development activities with practical community needs and opportunities for participation.',
+          },
+        ],
+      },
+      {
+        label: 'The BWYDC relationship',
+        questions: [
+          {
+            question: 'What is the relationship between BWYDC and B4P CODEFOUND?',
+            answer:
+              'BWYDC was established by B4P CODEFOUND. BWYDC serves as the foundation’s flagship regional model for decentralizing development activities in Africa.',
+          },
+          {
+            question: 'Why is BWYDC important to B4P CODEFOUND?',
+            answer:
+              'BWYDC gives B4P CODEFOUND a practical, locally rooted model for advancing development, peace, leadership, and economic opportunity through communities in Central Liberia.',
+          },
+          {
+            question: 'Is BWYDC part of B4P CODEFOUND’s regional work?',
+            answer:
+              'Yes. BWYDC is the flagship regional model through which B4P CODEFOUND decentralizes development activities in Africa, with its work rooted in Bong County and Central Liberia.',
+          },
+          {
+            question: 'How can an organization work with BWYDC and B4P CODEFOUND?',
+            answer:
+              'Organizations can begin by contacting the official BWYDC communication channels with a clear description of their shared goals, community focus, and proposed contribution.',
           },
         ],
       },
@@ -102,7 +208,7 @@ const categories: Category[] = [
     label: 'Membership & partners',
     topics: [
       {
-        label: 'Membership',
+        label: 'Joining BWYDC',
         questions: [
           {
             question: 'How can I apply for BWYDC membership?',
@@ -110,9 +216,29 @@ const categories: Category[] = [
               'Use the membership application on this website. Complete the required questions, review your information, and submit the application. You will receive an application reference after submission.',
           },
           {
+            question: 'What membership options are available?',
+            answer:
+              'The form offers Individual / Regular membership, Group / Regular membership for organizations and collectives, and Associate Membership for supporting partners.',
+          },
+          {
+            question: 'What can I choose as a membership interest?',
+            answer:
+              'The application lets you select interests in loans, group participation and development, personal development and training, volunteerism, and general benefits.',
+          },
+          {
+            question: 'What happens after I submit my application?',
+            answer:
+              'Your application is submitted for review and the website displays an application reference number. Please save that reference so the BWYDC team can identify your application and contact you about next steps.',
+          },
+          {
             question: 'What payment methods are available?',
             answer:
               'The registration fee payment methods shown on the form are Sendwave, MoMo from MTN, and Orange Money. Please use the payment instructions provided by the BWYDC team when completing your registration.',
+          },
+          {
+            question: 'What information should I prepare before applying?',
+            answer:
+              'Prepare your contact and location details, emergency contact information, date of birth, education and membership preferences, interests, and the required agreement information. The form marks required questions clearly.',
           },
         ],
       },
@@ -125,9 +251,19 @@ const categories: Category[] = [
               'BWYDC works with local and international civil society groups on initiatives that address legal, social, and economic gaps. Organizations interested in partnership can use the official BWYDC communication channels to begin a conversation.',
           },
           {
-            question: 'Who is B4P CODEFOUND?',
+            question: 'What kinds of partners does BWYDC work with?',
             answer:
-              'The Business for Peace Community Development Foundation is a registered non-profit operating in Liberia and the United States. It was founded by Mrs. Lindora Howard-Diawara and uses BWYDC as its flagship regional model.',
+              'BWYDC works with local and international civil society groups and community networks whose work can help address legal, social, and economic needs.',
+          },
+          {
+            question: 'Can a community group join BWYDC?',
+            answer:
+              'Yes. The application includes a Group / Regular membership option for organizations and collectives. Groups can also describe their participation and development interests in the application.',
+          },
+          {
+            question: 'How can I ask a question that is not listed here?',
+            answer:
+              'Use the BWYDC Guide chatbot for quick answers about the organization, or contact the BWYDC team through its official communication channels for questions requiring a staff response.',
           },
         ],
       },
@@ -157,18 +293,18 @@ export default function FAQs() {
     <div className="bg-background">
       <section className="bg-black text-white">
         <div className="container mx-auto max-w-6xl px-4 py-10 sm:py-14">
-          <Link href="/help" className="inline-flex items-center gap-2 text-sm text-white/70 transition-colors hover:text-white">
-            <ArrowLeft className="h-4 w-4" /> Back to BWYDC information
+          <Link href="/" className="inline-flex items-center gap-2 text-sm text-white/70 transition-colors hover:text-white">
+            <ArrowLeft className="h-4 w-4" /> Back to membership application
           </Link>
           <div className="mt-8 flex items-start gap-4">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary text-white">
               <CircleHelp className="h-6 w-6" />
             </div>
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Need to know</p>
-              <h1 className="mt-2 text-4xl font-extrabold tracking-tight sm:text-6xl">Help &amp; FAQs</h1>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">BWYDC knowledge centre</p>
+              <h1 className="mt-2 text-4xl font-extrabold tracking-tight sm:text-6xl">BWYDC FAQs</h1>
               <p className="mt-4 max-w-2xl text-lg leading-8 text-white/70 sm:text-xl">
-                Choose a topic to find quick answers about BWYDC&apos;s purpose, programs, membership, and community work.
+                Choose a topic to learn about BWYDC, its parent organization B4P CODEFOUND, programs, membership, and partnerships.
               </p>
             </div>
           </div>

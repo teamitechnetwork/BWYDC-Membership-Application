@@ -18,12 +18,17 @@ const starterMessage: ChatMessage = {
 
 const knowledge = [
   {
-    keywords: ['what is bwydc', 'about bwydc', 'bwydc'],
+    keywords: ['what is bwydc', 'about bwydc', 'bwydc', 'cooperation'],
     answer:
       'BWYDC is the Bong County Women and Youth Development Cooperation, a community-centered initiative created by B4P CODEFOUND to advance grassroots empowerment in Bong County and Central Liberia.',
   },
   {
-    keywords: ['when', 'launch', 'founded', 'established', 'gbarnga'],
+    keywords: ['stand for', 'full name', 'acronym'],
+    answer:
+      'BWYDC stands for the Bong County Women and Youth Development Cooperation.',
+  },
+  {
+    keywords: ['when launched', 'launch', 'gbarnga', 'june 2023'],
     answer:
       'BWYDC was officially launched in June 2023 in Gbarnga, Bong County, Liberia.',
   },
@@ -33,9 +38,14 @@ const knowledge = [
       'Our mission is to increase the social, political, and economic agency of women, girls, and youth by connecting local groups with resources, leadership skills, and financial autonomy for socio-economic justice and lasting peace.',
   },
   {
-    keywords: ['program', 'pillar', 'economic', 'agribusiness', 'entrepreneur'],
+    keywords: ['program', 'pillar', 'four areas', 'four program'],
     answer:
-      'BWYDC works across four pillars: economic justice; leadership and education; social cohesion; and youth advocacy. Economic justice includes agribusiness, entrepreneurship tools, and business development.',
+      'BWYDC works across four areas: economic justice; leadership and education; social cohesion; and youth advocacy.',
+  },
+  {
+    keywords: ['economic', 'agribusiness', 'entrepreneur', 'business development'],
+    answer:
+      'Economic justice includes agribusiness, entrepreneurship tools, and direct business development so local groups can build stronger and more independent livelihoods.',
   },
   {
     keywords: ['leadership', 'education', 'civic', 'governance', 'conflict'],
@@ -58,19 +68,69 @@ const knowledge = [
       'BWYDC coordinates physical and virtual forums that bring representatives from all 14 administrative districts of Bong County together to discuss access to justice and equal rights.',
   },
   {
+    keywords: ['women', 'girls', 'empowerment', 'agency'],
+    answer:
+      'BWYDC connects women and girls with resources, leadership development, participation opportunities, and pathways toward greater social, political, and economic agency.',
+  },
+  {
+    keywords: ['how can youth', 'young people', 'youth take part'],
+    answer:
+      'Young people can apply for membership and explore leadership, education, youth advocacy, community dialogue, and other opportunities offered through BWYDC’s work.',
+  },
+  {
     keywords: ['partner', 'partnership', 'organization', 'civil society'],
     answer:
       'BWYDC works with local and international civil society groups, including the Liberia Women and Children Aid Initiative, to address legal and socio-economic gaps.',
   },
   {
-    keywords: ['b4p', 'codefound', 'parent', 'foundation', 'lindora'],
+    keywords: ['what is b4p', 'who is b4p', 'b4p codefound', 'parent organization'],
     answer:
       'BWYDC was established by the Business for Peace Community Development Foundation (B4P CODEFOUND), a registered non-profit operating in Liberia and the United States. The foundation was founded by Mrs. Lindora Howard-Diawara.',
+  },
+  {
+    keywords: ['what does b4p stand for', 'business for peace', 'full name b4p'],
+    answer:
+      'B4P CODEFOUND stands for the Business for Peace Community Development Foundation.',
+  },
+  {
+    keywords: ['who founded b4p', 'lindora', 'founder'],
+    answer:
+      'B4P CODEFOUND was founded by Mrs. Lindora Howard-Diawara.',
+  },
+  {
+    keywords: ['where b4p', 'b4p operate', 'countries b4p'],
+    answer:
+      'B4P CODEFOUND operates in Liberia and the United States. BWYDC is its flagship regional model for development activities in Africa.',
+  },
+  {
+    keywords: ['relationship', 'connected', 'bwydc and b4p', 'parent'],
+    answer:
+      'BWYDC was established by B4P CODEFOUND and serves as the foundation’s flagship regional model for decentralizing development activities in Africa.',
+  },
+  {
+    keywords: ['why created', 'decentraliz', 'regional model', 'flagship'],
+    answer:
+      'BWYDC gives B4P CODEFOUND a locally rooted model for advancing development, peace, leadership, and economic opportunity through communities in Central Liberia.',
   },
   {
     keywords: ['member', 'membership', 'apply', 'application', 'join'],
     answer:
       'You can apply using the membership form on this site. Complete the required questions, review your details, and submit. Your application reference appears after submission.',
+  },
+  {
+    keywords: ['membership option', 'individual', 'group membership', 'associate'],
+    answer:
+      'The form offers Individual / Regular membership, Group / Regular membership for organizations and collectives, and Associate Membership for supporting partners.',
+  },
+  {
+    keywords: ['interest', 'loans', 'volunteer', 'training', 'benefits'],
+    answer:
+      'The membership form lets you select interests in loans, group participation and development, personal development and training, volunteerism, and general benefits.',
+  },
+  {
+    keywords: ['after submit', 'next step', 'reference'],
+    answer:
+      'After submission, the website displays an application reference number. Save it so the BWYDC team can identify your application and contact you about next steps.',
   },
   {
     keywords: ['payment', 'fee', 'orange', 'mtn', 'sendwave'],
@@ -79,7 +139,7 @@ const knowledge = [
   },
 ];
 
-const quickQuestions = ['What is BWYDC?', 'What programs do you run?', 'How do I apply?'];
+const quickQuestions = ['What is BWYDC?', 'What programs do you run?', 'Who is B4P CODEFOUND?', 'How do I apply?'];
 
 function findAnswer(question: string): string {
   const normalized = question.toLowerCase().replace(/[^\w\s]/g, ' ');
@@ -92,7 +152,7 @@ function findAnswer(question: string): string {
 
   if (match && match.score > 0) return match.entry.answer;
 
-  return 'I can help with BWYDC’s mission, programs, community work, partnerships, membership, and payment methods. Try asking “What is BWYDC?”, “What programs do you run?”, or “How do I apply?”';
+  return 'I can help with BWYDC, B4P CODEFOUND, the four program areas, community work, partnerships, membership, and payment methods. Try asking “Who is B4P CODEFOUND?”, “What programs do you run?”, or “How do I apply?”';
 }
 
 export function FloatingChatbot() {

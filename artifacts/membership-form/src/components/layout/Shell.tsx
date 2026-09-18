@@ -29,12 +29,12 @@ export function Shell({ children }: { children: ReactNode }) {
           </Link>
 
           <div className="flex items-center gap-2">
-            <Link href="/help" aria-label="Help and information">
+            <Link href="/faqs" aria-label="BWYDC FAQs">
               <Button
                 variant="outline"
                 size="icon"
                 className="border-white/25 bg-transparent text-white hover:bg-white hover:text-black"
-                title="Help and information"
+                title="BWYDC FAQs"
               >
                 <CircleHelp className="h-4 w-4" />
               </Button>
