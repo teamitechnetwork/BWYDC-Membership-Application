@@ -4,12 +4,12 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "pnpm -r --if-present run build",
+    "build": "pnpm run typecheck && pnpm -r --if-present run build",
     "typecheck:libs": "tsc --build",
     "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
   },
   "dependencies": {
-    "@replit/connectors-sdk": "^0.4.1"
+    "@replit/connectors-sdk": "^0.4.1
   },
   "devDependencies": {
     "prettier": "^3.9.6",
