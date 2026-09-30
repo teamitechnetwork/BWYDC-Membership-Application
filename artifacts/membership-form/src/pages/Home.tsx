@@ -15,6 +15,7 @@ import { useEffect, useState, useRef } from 'react';
 import { differenceInYears } from 'date-fns';
 import {
   ArrowRight,
+  CircleAlert,
   CheckCircle2,
   CreditCard,
   Loader2,
@@ -103,10 +104,45 @@ function markWelcomeAsSeen(): void {
   }
 }
 
+function getSubmissionErrorMessage(error: unknown): string {
+  if (error && typeof error === 'object') {
+    const value = error as {
+      data?: unknown;
+      message?: unknown;
+      name?: unknown;
+    };
+
+    if (value.data && typeof value.data === 'object') {
+      const data = value.data as { error?: unknown; message?: unknown };
+      if (typeof data.error === 'string' && data.error.trim()) {
+        return data.error;
+      }
+      if (typeof data.message === 'string' && data.message.trim()) {
+        return data.message;
+      }
+    }
+
+    if (value.name === 'ResponseParseError') {
+      return 'The application service returned an unexpected response. Please try again in a moment.';
+    }
+
+    if (typeof value.message === 'string' && value.message.trim()) {
+      return value.message;
+    }
+  }
+
+  if (error instanceof TypeError) {
+    return 'We could not connect to the application service. Please check your connection and try again.';
+  }
+
+  return 'We could not submit your application. Please try again.';
+}
+
 export default function Home() {
   const [entryStage, setEntryStage] = useState<'loading' | 'welcome' | 'form'>('loading');
   const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
   const [successId, setSuccessId] = useState<number | null>(null);
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [orangeMoneyLogoFailed, setOrangeMoneyLogoFailed] = useState(false);
   const photoInputRef = useRef<HTMLInputElement>(null);
@@ -205,6 +241,16 @@ export default function Home() {
   };
 
   const onSubmit = (data: FormValues) => {
+    setSubmissionError(null);
+
+    if (import.meta.env.PROD && !getApiBaseUrl()) {
+      const message =
+        'The application service is not configured for this deployment. Please contact BWYDC support before trying again.';
+      setSubmissionError(message);
+      toast.error(message);
+      return;
+    }
+
     const { agreeToTerms, newsletterSubscribe, ...apiData } = data;
 
     const finalData = {
@@ -233,11 +279,20 @@ export default function Home() {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         },
         onError: (error) => {
-          const msg = (error as unknown as { error?: string }).error || error.message || 'Failed to submit application. Please try again.';
+          const msg = getSubmissionErrorMessage(error);
+          setSubmissionError(msg);
           toast.error(msg);
         },
       }
     );
+  };
+
+  const onInvalidSubmit = () => {
+    const firstError = Object.keys(form.formState.errors)[0] as keyof FormValues | undefined;
+    if (firstError) {
+      form.setFocus(firstError);
+    }
+    toast.error('Please review the highlighted fields before submitting.');
   };
 
   const handleDobChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -337,13 +392,19 @@ export default function Home() {
             </div>
             <CardTitle className="text-3xl text-primary font-bold">Application Received</CardTitle>
             <CardDescription className="text-lg mt-2">
-              Thank you for applying to the Bong County Women and Youth Development Cooperration.
+              Thank you for applying to the Bong County Women and Youth Development Cooperation.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-muted-foreground">
               Your application has been submitted and is currently <span className="font-semibold text-foreground">pending review</span>.
             </p>
+            <div className="mx-auto max-w-md rounded-lg border border-primary/20 bg-primary/[0.06] p-4 text-left">
+              <p className="font-semibold text-foreground">What happens next?</p>
+              <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                The BWYDC team will review your information and contact you about the next steps. Keep your reference number until the review is complete.
+              </p>
+            </div>
             <div className="bg-muted rounded-lg p-6 max-w-sm mx-auto inline-block border border-border/50">
               <p className="text-sm text-muted-foreground mb-1">Your Application Reference ID</p>
               <p className="text-3xl font-mono font-bold tracking-widest text-foreground">#{successId}</p>
@@ -391,7 +452,7 @@ export default function Home() {
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="reference-form space-y-10">
+        <form onSubmit={form.handleSubmit(onSubmit, onInvalidSubmit)} className="reference-form space-y-10">
 
           {/* SECTION 1: Contact Details */}
           <Card className="overflow-visible rounded-none border-0 bg-transparent shadow-none">
@@ -1035,6 +1096,19 @@ export default function Home() {
               </div>
             </CardContent>
           </Card>
+          {submissionError && (
+            <div
+              role="alert"
+              aria-live="assertive"
+              className="flex items-start gap-3 rounded-xl border border-destructive/30 bg-destructive/5 p-4 text-sm text-destructive"
+            >
+              <CircleAlert className="mt-0.5 h-5 w-5 shrink-0" />
+              <div>
+                <p className="font-semibold">Submission could not be completed</p>
+                <p className="mt-1 leading-6">{submissionError}</p>
+              </div>
+            </div>
+          )}
           <div className="flex flex-col-reverse gap-3 border-t border-border/60 pt-6 sm:flex-row sm:items-center sm:justify-between">
             <Button
               type="button"
