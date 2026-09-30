@@ -402,7 +402,7 @@ export default function Home() {
             <div className="mx-auto max-w-md rounded-lg border border-primary/20 bg-primary/[0.06] p-4 text-left">
               <p className="font-semibold text-foreground">What happens next?</p>
               <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                The BWYDC team will review your information and contact you about the next steps. Keep your reference number until the review is complete.
+                Your application was automatically sent to BWYDC and copied to our Google Sheet. The team will review your information and contact you about the next steps.
               </p>
             </div>
             <div className="bg-muted rounded-lg p-6 max-w-sm mx-auto inline-block border border-border/50">
@@ -422,9 +422,6 @@ export default function Home() {
                 <CreditCard className="w-4 h-4" />
                 View Digital ID Card
               </Button>
-            </Link>
-            <Link href={`/applications/${successId}`} className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90">
-              View Application Status
             </Link>
           </CardFooter>
         </Card>
