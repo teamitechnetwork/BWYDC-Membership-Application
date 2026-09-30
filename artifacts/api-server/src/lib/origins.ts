@@ -22,8 +22,8 @@ function buildAllowedOrigins(): Set<string> {
     }
   }
 
-  // Production frontend (Vercel) + any extra origins from env (comma-separated).
-  origins.add("https://bwydc-membership-form-2026.vercel.app");
+  // Production frontend domain and the Vercel team deployment domain.
+  origins.add("https://bwydc.b4pcodefound.org");
   const extra = process.env.FRONTEND_ORIGINS;
   if (extra) {
     for (const o of extra.split(",")) {
@@ -43,11 +43,9 @@ function buildAllowedOrigins(): Set<string> {
 
 export const ALLOWED_ORIGINS = buildAllowedOrigins();
 
-// Vercel preview deployments for this project (created per git push) get
-// unique subdomains under the owner's team scope. Allow those too so the
-// admin isn't locked out when opening a preview link. The suffix is exact
-// and scoped to this Vercel team, so other sites can't match it.
-const VERCEL_PREVIEW_SUFFIX = "-itechnetworkafrica-gifs-projects.vercel.app";
+// Vercel preview deployments for this project (created per git push) use
+// unique subdomains under this project's verified team scope.
+const VERCEL_PREVIEW_SUFFIX = "-itechteam.vercel.app";
 
 export function isAllowedOrigin(origin: string | undefined): boolean {
   if (!origin) return false;
