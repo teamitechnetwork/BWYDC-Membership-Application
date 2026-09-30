@@ -1,0 +1,32 @@
+Connect the BWYDC membership application form to a Google Sheet so every successful submission is also sent to it automatically.
+
+REQUIREMENTS
+1. Do this on the SERVER, not in the React client. Create a helper (for example sendToSheet) that POSTs to the Google Apps Script web app URL stored in the secret SHEET_WEBHOOK_URL. Read the token from the secret SHEET_WEBHOOK_TOKEN. Never hardcode either value or expose them to the browser.
+2. Call the helper right after the application has been saved successfully in the existing database, inside the existing submit endpoint. It must not block or break the submission: wrap it in try/catch, log any error, and still return success to the applicant. Do not await it in a way that slows the response if it can be run in the background.
+3. Request format: method POST, header "Content-Type": "text/plain;charset=utf-8", and a JSON string body. Follow redirects (Apps Script answers with a 302; the row is already written, so a redirect is not an error).
+4. JSON body fields (send every key; use empty string when a field is blank):
+{
+  "token": process.env.SHEET_WEBHOOK_TOKEN,
+  "id": application ID from the database (string),
+  "submittedAt": submission time as "YYYY-MM-DD HH:mm",
+  "fullName", "phone", "email",
+  "country" (Country / State), "county" (Residence County), "district", "town",
+  "emergencyName", "emergencyPhone",
+  "gender", "dob" (format YYYY-MM-DD),
+  "education", "occupation", "maritalStatus", "children", "affiliate",
+  "photo": "Yes" if a passport photo was uploaded, otherwise "No",
+  "membershipType" (Individual / Regular, Group / Regular, or Associate Membership),
+  "loans", "groupDev", "training", "volunteer", "generalBenefits": each "Yes" or "No" depending on whether the matching interest was selected
+     (A = Loans, AB = Group Participation & Development, AC = Personal Development and Training, AD = Volunteerism, AE = General Benefits),
+  "onBehalf", "residentOf", "shares",
+  "signature",
+  "newsletter": "Yes" or "No",
+  "terms": "Yes" or "No"
+}
+Do NOT send an "age" field (the sheet calculates it). Send phone numbers as strings so leading zeros are kept.
+5. The Apps Script replies with {"ok":true,"row":N} on success or {"ok":false,"error":"..."} on failure. Log the outcome on the server.
+6. Add a small retry (up to 2 retries with a short delay) if the request fails with a network error or 5xx.
+7. Do not change the form's look, validation or existing behaviour.
+
+TEST
+After implementing, submit one test application through the form, show me the server log line for the sheet call, and tell me the exact file(s) you changed.

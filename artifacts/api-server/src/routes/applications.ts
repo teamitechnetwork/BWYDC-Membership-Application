@@ -13,6 +13,12 @@ import {
   UpdateApplicationStatusBody,
   UpdateApplicationStatusResponse,
 } from "@workspace/api-zod";
+import {
+  formatSubmittedAt,
+  hasInterest,
+  sendToSheet,
+  yesNo,
+} from "../lib/sheet";
 
 const router: IRouter = Router();
 
@@ -134,6 +140,50 @@ router.post("/membership-applications", async (req, res): Promise<void> => {
   );
 
   const app = toApplication(result.rows[0]);
+
+  // The database write is the source of truth for the applicant. The webhook
+  // runs in the background so a Sheets outage can never block or undo success.
+  void sendToSheet({
+    id: String(result.rows[0].id),
+    submittedAt: formatSubmittedAt(result.rows[0].submitted_at),
+    fullName: String(d.fullName ?? ""),
+    phone: String(d.phoneNumber ?? ""),
+    email: String(d.emailAddress ?? ""),
+    country: String(d.countryState ?? ""),
+    county: String(d.county ?? ""),
+    district: String(d.district ?? ""),
+    town: String(d.town ?? ""),
+    emergencyName: String(d.emergencyContactName ?? ""),
+    emergencyPhone: String(d.emergencyContactPhone ?? ""),
+    gender: String(d.gender ?? ""),
+    dob: String(d.dateOfBirth ?? ""),
+    education: String(d.educationalBackground ?? ""),
+    occupation: String(d.occupation ?? ""),
+    maritalStatus: String(d.maritalStatus ?? ""),
+    children: d.numberOfChildren ?? "",
+    affiliate: String(d.affiliateGroup ?? ""),
+    photo: result.rows[0].photo_url ? "Yes" : "No",
+    membershipType:
+      d.membershipType === "individual"
+        ? "Individual / Regular"
+        : d.membershipType === "group"
+          ? "Group / Regular"
+          : "Associate Membership",
+    loans: hasInterest(d.interestCategories, "A"),
+    groupDev: hasInterest(d.interestCategories, "AB"),
+    training: hasInterest(d.interestCategories, "AC"),
+    volunteer: hasInterest(d.interestCategories, "AD"),
+    generalBenefits: hasInterest(d.interestCategories, "AE"),
+    onBehalf: String(d.onBehalfOf ?? ""),
+    residentOf: String(d.residentOf ?? ""),
+    shares: String(d.sharesContribution ?? ""),
+    signature: String(d.signatureName ?? ""),
+    newsletter: yesNo(d.newsletterSubscribe ?? false),
+    // The API only accepts a submission after the form's terms checkbox has
+    // passed client validation, so a saved application has accepted terms.
+    terms: "Yes",
+  });
+
   res.status(201).json({
     ...CreateApplicationResponse.parse(app),
     // Returned once so the client can upload a photo immediately after submission.
